@@ -1,4 +1,8 @@
+import 'package:crm_track/cubit/task/task_cubit.dart';
+import 'package:crm_track/ui/pages/home_screen.dart';
+import 'package:crm_track/ui/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,12 +13,16 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+    return MaterialApp(
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => TaskCubit(),
+          )
+        ],
+        child: HomeScreen(),
       ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
