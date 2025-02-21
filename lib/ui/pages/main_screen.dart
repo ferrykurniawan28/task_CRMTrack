@@ -1,4 +1,5 @@
 import 'package:crm_track/ui/pages/home_screen.dart';
+import 'package:crm_track/ui/pages/task/task_list.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -11,11 +12,11 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _index = 0;
   List<Widget> screens = [
-    HomeScreen(),
-    HomeScreen(),
-    HomeScreen(),
-    HomeScreen(),
-    HomeScreen(),
+    const HomeScreen(),
+    const HomeScreen(),
+    const HomeScreen(),
+    const TaskListPage(),
+    const HomeScreen(),
   ];
 
   @override
