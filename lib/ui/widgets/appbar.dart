@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class HomeAppbar extends StatelessWidget {
   const HomeAppbar({super.key});
@@ -11,9 +12,12 @@ class HomeAppbar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.asset('assets/images/CRMTrack.png', width: 79),
-          const Icon(
-            Icons.notifications_none,
-            size: 24,
+          GestureDetector(
+            onTap: () => Modular.to.pushNamed('/notification-center'),
+            child: const Icon(
+              Icons.notifications_none,
+              size: 24,
+            ),
           ),
         ],
       ),
