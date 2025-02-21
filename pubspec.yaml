@@ -8,10 +8,12 @@ environment:
 
 dependencies:
   bloc: ^9.0.0
+  dotted_line: ^3.2.3
   flutter:
     sdk: flutter
   flutter_bloc: ^9.0.0
   flutter_modular: ^6.3.4
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:

@@ -207,7 +207,7 @@ Widget customTextForm({
                         ? Icons.visibility_off_outlined
                         : Icons.visibility_outlined,
                   ),
-                  onPressed: onToggleObscure, // Use the passed function
+                  onPressed: onToggleObscure,
                 )
               : null,
         ),
