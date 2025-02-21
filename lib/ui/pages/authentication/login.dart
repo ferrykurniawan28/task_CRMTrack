@@ -1,6 +1,7 @@
 import 'package:crm_track/helpers/helpers.dart';
 import 'package:crm_track/ui/pages/notification.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -43,7 +44,7 @@ class _LoginState extends State<Login> {
               child: Column(
                 children: [
                   Image.asset('assets/images/CRMTrack.png'),
-                  CustomSpacer.height(38),
+                  spacerHeight(38),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Column(
@@ -77,7 +78,7 @@ class _LoginState extends State<Login> {
                       ],
                     ),
                   ),
-                  CustomSpacer.height(38),
+                  spacerHeight(38),
                   Column(
                     children: [
                       customTextForm(
@@ -85,13 +86,13 @@ class _LoginState extends State<Login> {
                         required: true,
                         controller: _codeController,
                       ),
-                      CustomSpacer.height(20),
+                      spacerHeight(20),
                       customTextForm(
                         title: 'Username',
                         required: true,
                         controller: _usernameController,
                       ),
-                      CustomSpacer.height(20),
+                      spacerHeight(20),
                       customTextForm(
                         title: 'Password',
                         required: true,
@@ -118,13 +119,7 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const NotificationCenter(),
-                            ),
-                          );
-                        },
+                        onPressed: () => Modular.to.navigate('/home'),
                         style: ButtonStyle(
                           backgroundColor:
                               WidgetStateProperty.all(const Color(0xFFD4292C)),
@@ -176,7 +171,7 @@ Widget customTextForm({
               color: Color(0xFF141619),
             ),
           ),
-          CustomSpacer.width(4),
+          spacerHeight(4),
           required
               ? const Text(
                   '*',
@@ -188,7 +183,7 @@ Widget customTextForm({
               : const SizedBox(),
         ],
       ),
-      CustomSpacer.height(4),
+      spacerHeight(4),
       TextFormField(
         controller: controller,
         obscureText: isPassword ? isObscure : false,

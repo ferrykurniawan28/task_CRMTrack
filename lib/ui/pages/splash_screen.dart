@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import '../../helpers/helpers.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,7 +16,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     startDownload();
   }
@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     });
 
     Timer.periodic(
-      Duration(milliseconds: 200),
+      const Duration(milliseconds: 200),
       (timer) {
         setState(() {
           if (progress < 1.0) {
@@ -36,6 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
           if (progress >= 1.0) {
             timer.cancel();
             isDownloading = false;
+            Modular.to.navigate('/auth/login');
           }
         });
       },

@@ -111,7 +111,7 @@ Widget notificationCard(Notifications notification) {
                         color: Color(0xFF00A3FF),
                         size: 16,
                       ),
-                      CustomSpacer.width(8),
+                      spacerHeight(8),
                       const Text(
                         'Info',
                         style: TextStyle(
@@ -132,7 +132,7 @@ Widget notificationCard(Notifications notification) {
                         color: Color(0xFFFFA800),
                         size: 16,
                       ),
-                      CustomSpacer.width(8),
+                      spacerHeight(8),
                       const Text(
                         'Warning',
                         style: TextStyle(
@@ -153,7 +153,7 @@ Widget notificationCard(Notifications notification) {
                         color: Color(0xFFFF4D4D),
                         size: 16,
                       ),
-                      CustomSpacer.width(8),
+                      spacerHeight(8),
                       const Text(
                         'Error',
                         style: TextStyle(
