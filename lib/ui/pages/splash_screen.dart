@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:crm_track/ui/pages/home/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import '../../helpers/helpers.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,7 +17,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     startDownload();
   }
@@ -28,25 +28,19 @@ class _SplashScreenState extends State<SplashScreen> {
     });
 
     Timer.periodic(
-      Duration(milliseconds: 200),
+      const Duration(milliseconds: 200),
       (timer) {
-        setState(
-          () {
-            if (progress < 1.0) {
-              progress += 0.05;
-            }
-            if (progress >= 1.0) {
-              timer.cancel();
-              isDownloading = false;
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
-                ),
-              );
-            }
-          },
-        );
+
+        setState(() {
+          if (progress < 1.0) {
+            progress += 0.05;
+          }
+          if (progress >= 1.0) {
+            timer.cancel();
+            isDownloading = false;
+            Modular.to.navigate('/auth/login');
+          }
+        });
       },
     );
   }

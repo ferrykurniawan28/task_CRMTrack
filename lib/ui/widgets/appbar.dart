@@ -3,7 +3,8 @@ import 'dart:ui';
 import 'package:crm_track/ui/pages/notification.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
 
 class HomeAppbar extends StatelessWidget {
   const HomeAppbar({super.key});
@@ -17,14 +18,7 @@ class HomeAppbar extends StatelessWidget {
         children: [
           Image.asset('assets/images/CRMTrack.png', width: 79),
           GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => NotificationCenter(),
-                ),
-              );
-            },
+            onTap: () => Modular.to.pushNamed('/notification-center'),
             child: const Icon(
               Icons.notifications_none,
               size: 24,
