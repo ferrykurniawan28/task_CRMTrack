@@ -94,6 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         icon: Image.asset('assets/icon/funnel.png'),
                         title: 'Funnel\nSummary'),
                     CardMenu(
+                        onTap: () => Modular.to.pushNamed('/list-activity'),
                         icon: Image.asset('assets/icon/activity.png'),
                         title: 'List\nActivity'),
                     CardMenu(

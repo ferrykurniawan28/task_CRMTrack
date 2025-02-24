@@ -1,4 +1,5 @@
 import 'package:crm_track/ui/pages/authentication/login.dart';
+import 'package:crm_track/ui/pages/list_activity.dart';
 import 'package:crm_track/ui/pages/main_screen.dart';
 import 'package:crm_track/ui/pages/marketing_toolkit_screen.dart';
 import 'package:crm_track/ui/pages/notification.dart';
@@ -21,6 +22,7 @@ class MainRoutes extends Module {
       return TaskListDetail(task: args);
     });
     r.child('/marketing-toolkit', child: (_) => const MarketingToolkitScreen());
+    r.child('/list-activity', child: (_) => const ListActivityScreen());
     r.module('/auth', module: AuthRoutes());
   }
 }
