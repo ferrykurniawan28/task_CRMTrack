@@ -1,3 +1,5 @@
+part of 'models.dart';
+
 class TaskDetail {
   int? id;
   String title;

@@ -5,6 +5,7 @@ import 'package:crm_track/ui/widgets/appbar.dart';
 import 'package:crm_track/ui/widgets/home_menu.dart';
 import 'package:crm_track/ui/widgets/home_task_list_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../widgets/workflow.dart';
 
@@ -80,6 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Row(
                   children: [
                     CardMenu(
+                        onTap: () => Modular.to.pushNamed('/marketing-toolkit'),
                         icon: Image.asset('assets/icon/tools.png'),
                         title: 'Marketing\nToolkit'),
                     CardMenu(
