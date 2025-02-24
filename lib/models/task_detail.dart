@@ -1,4 +1,5 @@
 class TaskDetail {
+  int? id;
   String title;
   String desc;
   DateTime dueDate;
@@ -9,6 +10,7 @@ class TaskDetail {
   ProductDetail product;
 
   TaskDetail({
+    this.id,
     required this.title,
     required this.desc,
     required this.dueDate,
@@ -21,6 +23,7 @@ class TaskDetail {
 
   factory TaskDetail.fromJson(Map<String, dynamic> json) {
     return TaskDetail(
+      id: json['id'],
       title: json['title'],
       desc: json['desc'],
       dueDate: DateTime.parse(json['dueDate']),
@@ -34,6 +37,7 @@ class TaskDetail {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'title': title,
       'desc': desc,
       'dueDate': dueDate.toIso8601String(),
@@ -146,6 +150,7 @@ class ProductDetail {
 
 List<TaskDetail> dummyTask = [
   TaskDetail(
+    id: 1,
     title: 'Task 1',
     desc: 'Description 1',
     dueDate: DateTime.now(),
@@ -168,6 +173,7 @@ List<TaskDetail> dummyTask = [
     ),
   ),
   TaskDetail(
+    id: 2,
     title: 'Task 2',
     desc: 'Description 2',
     dueDate: DateTime.now(),
@@ -190,6 +196,7 @@ List<TaskDetail> dummyTask = [
     ),
   ),
   TaskDetail(
+    id: 3,
     title: 'Task 2',
     desc: 'Description 2',
     dueDate: DateTime.now(),

@@ -1,4 +1,5 @@
 import 'package:crm_track/ui/pages/home_screen.dart';
+import 'package:crm_track/ui/pages/profile_screen.dart';
 import 'package:crm_track/ui/pages/task/task_list.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
     const HomeScreen(),
     const HomeScreen(),
     const TaskListPage(),
-    const HomeScreen(),
+    const ProfileScreen(),
   ];
 
   @override
@@ -35,9 +36,9 @@ class _MainScreenState extends State<MainScreen> {
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 1,
-              blurRadius: 7,
-              offset: const Offset(0, 3),
+              spreadRadius: 0,
+              blurRadius: 8.9,
+              offset: const Offset(0, 0),
             ),
           ],
         ),
@@ -45,7 +46,7 @@ class _MainScreenState extends State<MainScreen> {
           clipBehavior: Clip.none,
           alignment: Alignment.bottomCenter,
           children: [
-            Container(
+            SizedBox(
               height: 84,
               width: double.infinity,
               // padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
