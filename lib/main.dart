@@ -1,6 +1,5 @@
-import 'package:crm_track/ui/pages/authentication/login.dart';
 import 'package:crm_track/cubit/task/task_cubit.dart';
-import 'package:crm_track/ui/pages/home_screen.dart';
+import 'package:crm_track/ui/pages/agenda.dart';
 import 'package:crm_track/ui/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,11 +16,9 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       home: MultiBlocProvider(
         providers: [
-          BlocProvider(
-            create: (context) => TaskCubit(),
-          )
+          BlocProvider(create: (_) => TaskCubit()),
         ],
-        child: HomeScreen(),
+        child: AgendaPage(),
       ),
       debugShowCheckedModeBanner: false,
     );

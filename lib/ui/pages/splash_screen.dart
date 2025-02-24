@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:crm_track/ui/pages/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import '../../helpers/helpers.dart';
 
@@ -29,15 +30,23 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer.periodic(
       Duration(milliseconds: 200),
       (timer) {
-        setState(() {
-          if (progress < 1.0) {
-            progress += 0.05;
-          }
-          if (progress >= 1.0) {
-            timer.cancel();
-            isDownloading = false;
-          }
-        });
+        setState(
+          () {
+            if (progress < 1.0) {
+              progress += 0.05;
+            }
+            if (progress >= 1.0) {
+              timer.cancel();
+              isDownloading = false;
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+                ),
+              );
+            }
+          },
+        );
       },
     );
   }

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:crm_track/cubit/task/task_cubit.dart';
@@ -14,9 +16,8 @@ class _HomeTaskListWidgetState extends State<HomeTaskListWidget> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<TaskCubit>().getTasks();
-    });
+
+    context.read<TaskCubit>().getTasks();
   }
 
   @override
@@ -117,13 +118,23 @@ class _HomeTaskListWidgetState extends State<HomeTaskListWidget> {
                         if (data.isEmpty) {
                           return Center(child: Text('No tasks'));
                         }
+
+                        final filteredData = data.where(
+                          (element) {
+                            return element.doDate!.day == DateTime.now().day &&
+                                element.doDate!.month == DateTime.now().month &&
+                                element.doDate!.year == DateTime.now().year;
+                          },
+                        ).toList();
+
                         return ListView.builder(
-                          itemCount: data.length,
+                          itemCount: filteredData.length,
                           itemBuilder: (context, index) {
-                            final dataTask = data[index];
+                            final dataTask = filteredData[index];
+                            final startTime = dataTask.startTime!;
                             return HomeListCard(
                               isCompleted: dataTask.isCompleted,
-                              time: dataTask.time,
+                              time: startTime.format(context),
                               title: dataTask.title,
                               type: dataTask.type,
                             );

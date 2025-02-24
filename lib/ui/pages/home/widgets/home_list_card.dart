@@ -2,10 +2,10 @@ import 'package:crm_track/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 
 class HomeListCard extends StatefulWidget {
-  final String type;
-  final String title;
-  bool isCompleted;
-  final String time;
+  final String? type;
+  final String? title;
+  bool? isCompleted;
+  final String? time;
   HomeListCard({
     super.key,
     required this.type,
@@ -21,6 +21,7 @@ class HomeListCard extends StatefulWidget {
 class _HomeListCardState extends State<HomeListCard> {
   @override
   Widget build(BuildContext context) {
+    bool isCompleted = widget.isCompleted!;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       margin: EdgeInsets.only(bottom: 10),
@@ -63,7 +64,7 @@ class _HomeListCardState extends State<HomeListCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.title,
+                    widget.title ?? '-',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -71,7 +72,7 @@ class _HomeListCardState extends State<HomeListCard> {
                     ),
                   ),
                   Text(
-                    widget.time,
+                    widget.time ?? '-',
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
@@ -83,11 +84,11 @@ class _HomeListCardState extends State<HomeListCard> {
             ],
           ),
           Container(
-            child: widget.isCompleted
+            child: isCompleted
                 ? GestureDetector(
                     onTap: () {
                       setState(() {
-                        widget.isCompleted = !widget.isCompleted;
+                        isCompleted = !isCompleted;
                       });
                     },
                     child: Container(
