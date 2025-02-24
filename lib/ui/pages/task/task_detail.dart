@@ -1,7 +1,9 @@
+import 'package:crm_track/cubit/task_list/task_list_cubit.dart';
 import 'package:crm_track/helpers/helpers.dart';
 import 'package:crm_track/models/task_detail.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class TaskListDetail extends StatelessWidget {
@@ -520,11 +522,36 @@ class TaskListDetail extends StatelessWidget {
                                 spacerHeight(12),
                                 Column(
                                   children: TaskStatus.values.map((status) {
+                                    String statusText;
+                                    switch (status) {
+                                      case TaskStatus.notStarted:
+                                        statusText = 'Not Started';
+                                        break;
+                                      case TaskStatus.inProgress:
+                                        statusText = 'In Progress';
+                                        break;
+                                      case TaskStatus.completed:
+                                        statusText = 'Completed';
+                                        break;
+                                      case TaskStatus.deffered:
+                                        statusText = 'Deferred';
+                                        break;
+                                      case TaskStatus.other:
+                                        statusText = 'Other';
+                                        break;
+                                      default:
+                                        statusText = 'Not Started';
+                                    }
                                     return RadioListTile<TaskStatus>(
                                       dense: true,
                                       visualDensity: VisualDensity.compact,
                                       title: Text(
-                                          status.toString().split('.').last),
+                                        statusText,
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
                                       selectedTileColor: primaryColor,
                                       activeColor: primaryColor,
                                       value: status,
@@ -543,7 +570,9 @@ class TaskListDetail extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: ElevatedButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: Colors.white,
                                           shape: RoundedRectangleBorder(
@@ -567,6 +596,15 @@ class TaskListDetail extends StatelessWidget {
                                     Expanded(
                                       child: ElevatedButton(
                                         onPressed: () {
+                                          TaskDetail updatedTask = task;
+                                          updatedTask.status = task.status;
+
+                                          // Update the task status
+                                          context
+                                              .read<TaskListCubit>()
+                                              .updateTask(updatedTask);
+
+                                          Navigator.pop(context);
                                           Navigator.pop(context);
                                         },
                                         style: ElevatedButton.styleFrom(
