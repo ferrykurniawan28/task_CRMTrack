@@ -2,7 +2,7 @@ import 'package:crm_track/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../../models/task_detail.dart';
+import '../../../models/models.dart';
 
 class TaskListCard extends StatelessWidget {
   const TaskListCard({

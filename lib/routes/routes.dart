@@ -1,10 +1,12 @@
-import 'package:crm_track/models/task_detail.dart';
 import 'package:crm_track/ui/pages/authentication/login.dart';
 import 'package:crm_track/ui/pages/main_screen.dart';
+import 'package:crm_track/ui/pages/marketing_toolkit_screen.dart';
 import 'package:crm_track/ui/pages/notification.dart';
 import 'package:crm_track/ui/pages/splash_screen.dart';
 import 'package:crm_track/ui/pages/task/task_detail.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import '../models/models.dart';
 
 part 'auth_routes.dart';
 
@@ -18,6 +20,7 @@ class MainRoutes extends Module {
       final args = Modular.args.data as TaskDetail;
       return TaskListDetail(task: args);
     });
+    r.child('/marketing-toolkit', child: (_) => const MarketingToolkitScreen());
     r.module('/auth', module: AuthRoutes());
   }
 }

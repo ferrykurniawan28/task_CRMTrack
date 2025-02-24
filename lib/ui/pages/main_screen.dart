@@ -1,4 +1,4 @@
-import 'package:crm_track/ui/pages/home_screen.dart';
+import 'package:crm_track/ui/pages/home/home_screen.dart';
 import 'package:crm_track/ui/pages/profile_screen.dart';
 import 'package:crm_track/ui/pages/task/task_list.dart';
 import 'package:flutter/material.dart';
