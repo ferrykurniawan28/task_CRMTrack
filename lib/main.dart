@@ -1,3 +1,5 @@
+import 'package:crm_track/cubit/notification/notification_cubit.dart';
+import 'package:crm_track/cubit/task_list/task_list_cubit.dart';
 import 'package:crm_track/routes/routes.dart';
 import 'package:crm_track/cubit/task/task_cubit.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +23,13 @@ class MainApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => TaskCubit(),
-        )
+        ),
+        BlocProvider(
+          create: (context) => NotificationCubit(),
+        ),
+        BlocProvider(
+          create: (context) => TaskListCubit(),
+        ),
       ],
       child: MaterialApp.router(
         routeInformationParser: Modular.routeInformationParser,
