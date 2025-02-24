@@ -1,13 +1,15 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:crm_track/cubit/task/task_cubit.dart';
 import 'package:crm_track/helpers/helpers.dart';
 import 'package:crm_track/ui/widgets/appbar.dart';
-import 'package:crm_track/ui/widgets/home_menu.dart';
-import 'package:crm_track/ui/widgets/home_task_list_widget.dart';
+import 'package:crm_track/ui/pages/home/widgets/home_menu.dart';
+import 'package:crm_track/ui/pages/home/widgets/home_task_list_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../widgets/workflow.dart';
+import '../../widgets/workflow.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -103,7 +105,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             spacerHeight(16),
             Expanded(
-              child: HomeTaskListWidget(),
+              child: BlocProvider(
+                create: (context) => TaskCubit(),
+                child: HomeTaskListWidget(),
+              ),
             )
           ],
         ),
