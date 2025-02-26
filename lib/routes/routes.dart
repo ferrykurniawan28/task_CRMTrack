@@ -5,11 +5,16 @@ import 'package:crm_track/ui/pages/marketing_toolkit_screen.dart';
 import 'package:crm_track/ui/pages/notification.dart';
 import 'package:crm_track/ui/pages/splash_screen.dart';
 import 'package:crm_track/ui/pages/task/task_detail.dart';
+import 'package:crm_track/ui/pages/work-flow/map.dart';
+import 'package:crm_track/ui/pages/work-flow/prospect_action.dart';
+import 'package:crm_track/ui/pages/work-flow/work_flow_list.dart';
+import 'package:crm_track/ui/pages/work-flow/workflow_detail.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../models/models.dart';
 
 part 'auth_routes.dart';
+part 'workflow_routes.dart';
 
 class MainRoutes extends Module {
   @override
@@ -23,6 +28,7 @@ class MainRoutes extends Module {
     });
     r.child('/marketing-toolkit', child: (_) => const MarketingToolkitScreen());
     r.child('/list-activity', child: (_) => const ListActivityScreen());
+    r.module('/workflow', module: WorkflowRoutes());
     r.module('/auth', module: AuthRoutes());
   }
 }
