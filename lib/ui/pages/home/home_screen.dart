@@ -50,7 +50,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   });
                 },
                 itemBuilder: (context, index) {
-                  return WorkflowWidget();
+                  return GestureDetector(
+                    onTap: () => Modular.to.pushNamed('/workflow'),
+                    child: WorkflowWidget(),
+                  );
                 },
               ),
             ),

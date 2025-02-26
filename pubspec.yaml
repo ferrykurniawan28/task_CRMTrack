@@ -8,15 +8,24 @@ environment:
 
 dependencies:
   bloc: ^9.0.0
+  dotted_border: ^2.1.0
   dotted_line: ^3.2.3
+  file_picker: ^8.3.2
   flutter:
     sdk: flutter
   flutter_bloc: ^9.0.0
+  flutter_map: ^7.0.2
   flutter_modular: ^6.3.4
+  image: ^4.5.3
+  image_picker: ^1.1.2
   intl: ^0.20.2
+  latlong2: ^0.9.1
   meta: ^1.12.0
   open_file: ^3.5.10
   path_provider: ^2.1.5
+  signature: ^5.5.0
+  timeline_tile: ^2.0.0
+  video_thumbnail: ^0.5.3
 
 dev_dependencies:
   flutter_test:

@@ -55,13 +55,12 @@ class _TaskListPageState extends State<TaskListPage> {
               ),
             ),
           ),
-          TaskFilterWidget(
+          FilterWidget(
             taskFilter: taskFilter,
             onSelected: (index) {
               setState(() {
                 selectedIndex = index;
               });
-              print(selectedIndex);
             },
           ),
           spacerHeight(12),
