@@ -27,15 +27,18 @@ class _SplashScreenState extends State<SplashScreen> {
       progress = 0.0;
     });
 
+    print('LOADING START');
+
     Timer.periodic(
       const Duration(milliseconds: 200),
       (timer) {
-
         setState(() {
           if (progress < 1.0) {
             progress += 0.05;
+            print(progress.toString());
           }
           if (progress >= 1.0) {
+            print('LOADING SELESAI');
             timer.cancel();
             isDownloading = false;
             Modular.to.navigate('/auth/login');

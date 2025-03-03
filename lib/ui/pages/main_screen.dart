@@ -1,4 +1,5 @@
-import 'package:crm_track/ui/pages/home_screen.dart';
+import 'package:crm_track/ui/pages/agenda/agenda.dart';
+import 'package:crm_track/ui/pages/home/home_screen.dart';
 import 'package:crm_track/ui/pages/profile_screen.dart';
 import 'package:crm_track/ui/pages/task/task_list.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class _MainScreenState extends State<MainScreen> {
   int _index = 0;
   List<Widget> screens = [
     const HomeScreen(),
-    const HomeScreen(),
+    const Agenda(),
     const HomeScreen(),
     const TaskListPage(),
     const ProfileScreen(),

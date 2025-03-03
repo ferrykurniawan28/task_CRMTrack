@@ -2,20 +2,37 @@ import 'package:crm_track/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../../../../../helpers/helpers.dart';
+
 class CalendarAgenda extends StatefulWidget {
   final Function(DateTime) onDateSelected;
-  const CalendarAgenda({super.key, required this.onDateSelected});
+  DateTime selectedDate;
+  final Function(DateTime) onMonthChange;
+  CalendarAgenda({
+    super.key,
+    required this.onDateSelected,
+    required this.selectedDate,
+    required this.onMonthChange,
+  });
 
   @override
   State<CalendarAgenda> createState() => _CalendarAgendaState();
 }
 
 class _CalendarAgendaState extends State<CalendarAgenda> {
-  DateTime? _selectedDay;
-  late DateTime _focusedDay = DateTime.now();
+  late DateTime _focusedDay;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _focusedDay = widget.selectedDate;
+  }
 
   @override
   Widget build(BuildContext context) {
+    DateTime _selectedDay = widget.selectedDate;
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
@@ -38,11 +55,19 @@ class _CalendarAgendaState extends State<CalendarAgenda> {
               setState(() {
                 _selectedDay = selectedDay;
                 _focusedDay = focusedDay;
+                print('day ${_selectedDay} ${_focusedDay}');
               });
-              widget.onDateSelected(selectedDay);
+              widget.onDateSelected(_selectedDay);
+            },
+            onPageChanged: (focusedDay) {
+              setState(() {
+                _focusedDay = focusedDay;
+              });
+              widget.onMonthChange(focusedDay);
             },
             headerStyle: HeaderStyle(
-              titleCentered: true,
+              titleTextStyle: TextStyle(color: Colors.transparent),
+              titleCentered: false,
               formatButtonShowsNext: false,
               formatButtonVisible: false,
               leftChevronVisible: false,

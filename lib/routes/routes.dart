@@ -1,4 +1,5 @@
 import 'package:crm_track/models/task_detail.dart';
+import 'package:crm_track/ui/pages/agenda/agenda.dart';
 import 'package:crm_track/ui/pages/authentication/login.dart';
 import 'package:crm_track/ui/pages/main_screen.dart';
 import 'package:crm_track/ui/pages/notification.dart';
@@ -18,6 +19,8 @@ class MainRoutes extends Module {
       final args = Modular.args.data as TaskDetail;
       return TaskListDetail(task: args);
     });
+    r.child('/agenda', child: (_) => const Agenda());
+
     r.module('/auth', module: AuthRoutes());
   }
 }
