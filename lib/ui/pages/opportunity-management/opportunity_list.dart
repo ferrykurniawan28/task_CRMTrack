@@ -28,6 +28,10 @@ class _OpportunityListState extends State<OpportunityList> {
         backgroundColor: primaryColor,
         foregroundColor: Colors.white,
         centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Modular.to.navigate('/home'),
+        ),
       ),
       backgroundColor: Colors.white,
       body: ListView(
