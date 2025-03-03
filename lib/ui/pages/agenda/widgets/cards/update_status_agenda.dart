@@ -1,8 +1,7 @@
 import 'package:crm_track/cubit/task_list/task_list_cubit.dart';
 import 'package:crm_track/helpers/helpers.dart';
-import 'package:crm_track/models/task_detail.dart';
+import 'package:crm_track/models/models.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../constants/dummy_data.dart';

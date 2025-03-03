@@ -1,6 +1,4 @@
-import 'package:crm_track/models/task_detail.dart';
-import 'package:flutter/material.dart';
-
+import 'package:crm_track/models/models.dart';
 import 'package:flutter/material.dart';
 
 List<TaskDetail> dummyTask = [

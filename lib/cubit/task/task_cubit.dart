@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:crm_track/constants/dummy_data.dart';
-import 'package:crm_track/models/task_detail.dart';
-import 'package:crm_track/models/task_model.dart';
+import 'package:crm_track/models/models.dart';
 import 'package:meta/meta.dart';
 
 part 'task_state.dart';

@@ -1,4 +1,4 @@
-import 'package:crm_track/models/task_detail.dart';
+import 'package:crm_track/models/models.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../helpers/filter.dart';
@@ -14,7 +14,7 @@ void _updateAgenda(TaskStatus dataStatus, int? id, BuildContext context) {
   showModalBottomSheet(
     context: context,
     backgroundColor: Colors.white,
-    shape: RoundedRectangleBorder(
+    shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
     builder: (context) {
       return UpdateStatusAgenda(

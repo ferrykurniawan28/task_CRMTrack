@@ -1,5 +1,5 @@
 import 'package:crm_track/helpers/helpers.dart';
-import 'package:crm_track/models/task_detail.dart';
+import 'package:crm_track/models/models.dart';
 import 'package:flutter/material.dart';
 
 ///filter task list model
@@ -77,8 +77,8 @@ Map<String, String> formatDateAndTime(
 List<TaskDetail> filterDataBySelectedDate(
     List<TaskDetail> dataList, DateTime selectedDate) {
   return dataList.where((element) {
-    return element.dueDate!.day == selectedDate.day &&
-        element.dueDate!.month == selectedDate.month &&
-        element.dueDate!.year == selectedDate.year;
+    return element.dueDate.day == selectedDate.day &&
+        element.dueDate.month == selectedDate.month &&
+        element.dueDate.year == selectedDate.year;
   }).toList();
 }

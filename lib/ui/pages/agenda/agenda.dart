@@ -1,20 +1,15 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:crm_track/ui/pages/agenda/widgets/cards/agenda_card_animate.dart';
-import 'package:crm_track/ui/pages/agenda/widgets/cards/focus_agenda_detail_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../cubit/task/task_cubit.dart';
 import '../../../helpers/filter.dart';
 import '../../../helpers/helpers.dart';
-import '../../../models/task_detail.dart';
 import '../../widgets/header_list.dart';
-import 'widgets/cards/agenda_card.dart';
 import 'widgets/calendar/calendar_agenda.dart';
 import 'widgets/calendar/calendar_agenda_detail.dart';
-import 'widgets/cards/update_status_agenda.dart';
 
 class Agenda extends StatefulWidget {
   const Agenda({super.key});
