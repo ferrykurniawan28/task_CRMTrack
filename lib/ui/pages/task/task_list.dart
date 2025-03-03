@@ -52,6 +52,12 @@ class _TaskListPageState extends State<TaskListPage> {
                     width: 1,
                   ),
                 ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFE6E6E6),
+                  ),
+                ),
               ),
             ),
           ),

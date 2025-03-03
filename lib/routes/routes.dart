@@ -1,8 +1,12 @@
+import 'package:crm_track/models/opportunity_model.dart';
 import 'package:crm_track/ui/pages/authentication/login.dart';
 import 'package:crm_track/ui/pages/list_activity.dart';
 import 'package:crm_track/ui/pages/main_screen.dart';
 import 'package:crm_track/ui/pages/marketing_toolkit_screen.dart';
 import 'package:crm_track/ui/pages/notification.dart';
+import 'package:crm_track/ui/pages/opportunity-management/opportunity_add.dart';
+import 'package:crm_track/ui/pages/opportunity-management/opportunity_detail.dart';
+import 'package:crm_track/ui/pages/opportunity-management/opportunity_list.dart';
 import 'package:crm_track/ui/pages/splash_screen.dart';
 import 'package:crm_track/ui/pages/task/task_detail.dart';
 import 'package:crm_track/ui/pages/work-flow/map.dart';
@@ -15,6 +19,7 @@ import '../models/models.dart';
 
 part 'auth_routes.dart';
 part 'workflow_routes.dart';
+part 'opportunity_management.dart';
 
 class MainRoutes extends Module {
   @override
@@ -30,5 +35,6 @@ class MainRoutes extends Module {
     r.child('/list-activity', child: (_) => const ListActivityScreen());
     r.module('/workflow', module: WorkflowRoutes());
     r.module('/auth', module: AuthRoutes());
+    r.module('/opportunity-management', module: OpportunityManagementRoutes());
   }
 }

@@ -91,6 +91,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         icon: Image.asset('assets/icon/tools.png'),
                         title: 'Marketing\nToolkit'),
                     CardMenu(
+                        onTap: () =>
+                            Modular.to.pushNamed('/opportunity-management'),
                         icon: Image.asset('assets/icon/lightbulb.png'),
                         title: 'Opportunity\nManagement'),
                     CardMenu(

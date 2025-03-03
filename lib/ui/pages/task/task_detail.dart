@@ -463,11 +463,9 @@ class TaskListDetail extends StatelessWidget {
         ),
         child: ElevatedButton(
           onPressed: () {
-            //open modal
             showModalBottomSheet(
               context: context,
-              isScrollControlled:
-                  true, // Allows the modal to adjust dynamically
+              isScrollControlled: true,
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20),
@@ -479,12 +477,9 @@ class TaskListDetail extends StatelessWidget {
                   builder: (context, setState) {
                     return Padding(
                       padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context)
-                            .viewInsets
-                            .bottom, // Adjust for keyboard
+                        bottom: MediaQuery.of(context).viewInsets.bottom,
                       ),
                       child: Wrap(
-                        // Wrap makes the modal height fit content
                         children: [
                           Container(
                             padding: const EdgeInsets.symmetric(
@@ -498,8 +493,7 @@ class TaskListDetail extends StatelessWidget {
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize
-                                  .min, // Ensures it doesn't take extra space
+                              mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
                                   'Update Status',
