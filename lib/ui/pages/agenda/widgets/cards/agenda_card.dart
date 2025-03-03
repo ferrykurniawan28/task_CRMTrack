@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../helpers/helpers.dart';
-import '../../theme/colors.dart';
+import '../../../../../helpers/helpers.dart';
+import '../../../../../theme/colors.dart';
 
 class AgendaCard extends StatelessWidget {
   final TimeOfDay startTime;
@@ -68,20 +68,33 @@ class AgendaCard extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
+                Container(
+                  width: 200,
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                Text(
-                  desc,
-                  style: TextStyle(
-                    color: kColorGrey,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                  ),
+                Row(
+                  children: [
+                    Container(
+                      width: 150,
+                      child: Text(
+                        desc,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: TextStyle(
+                          color: kColorGrey,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

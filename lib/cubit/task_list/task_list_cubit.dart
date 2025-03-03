@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-
+import '../../constants/dummy_data.dart';
 import '../../models/models.dart';
+
 
 part 'task_list_state.dart';
 
@@ -14,8 +17,12 @@ class TaskListCubit extends Cubit<TaskListState> {
     try {
       final tasks = dummyTask;
       emit(TaskListLoaded(tasks));
+      print('INI DATA LIST TASK');
+      print(tasks);
+      print('SAMPAI SINI');
     } catch (e) {
       emit(TaskListError(e.toString()));
+      print('ERROR:\N${e.toString()}');
     }
   }
 

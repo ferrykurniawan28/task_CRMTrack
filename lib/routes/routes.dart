@@ -1,3 +1,5 @@
+import 'package:crm_track/models/task_detail.dart';
+import 'package:crm_track/ui/pages/agenda/agenda.dart';
 import 'package:crm_track/models/opportunity_model.dart';
 import 'package:crm_track/ui/pages/authentication/login.dart';
 import 'package:crm_track/ui/pages/list_activity.dart';
@@ -31,6 +33,7 @@ class MainRoutes extends Module {
       final args = Modular.args.data as TaskDetail;
       return TaskListDetail(task: args);
     });
+    r.child('/agenda', child: (_) => const Agenda());
     r.child('/marketing-toolkit', child: (_) => const MarketingToolkitScreen());
     r.child('/list-activity', child: (_) => const ListActivityScreen());
     r.module('/workflow', module: WorkflowRoutes());

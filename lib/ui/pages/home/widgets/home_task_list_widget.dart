@@ -121,9 +121,10 @@ class _HomeTaskListWidgetState extends State<HomeTaskListWidget> {
 
                         final filteredData = data.where(
                           (element) {
-                            return element.doDate!.day == DateTime.now().day &&
-                                element.doDate!.month == DateTime.now().month &&
-                                element.doDate!.year == DateTime.now().year;
+                            return element.dueDate!.day == DateTime.now().day &&
+                                element.dueDate!.month ==
+                                    DateTime.now().month &&
+                                element.dueDate!.year == DateTime.now().year;
                           },
                         ).toList();
 
@@ -133,7 +134,7 @@ class _HomeTaskListWidgetState extends State<HomeTaskListWidget> {
                             final dataTask = filteredData[index];
                             final startTime = dataTask.startTime!;
                             return HomeListCard(
-                              isCompleted: dataTask.isCompleted,
+                              isCompleted: dataTask.isComplete,
                               time: startTime.format(context),
                               title: dataTask.title,
                               type: dataTask.type,

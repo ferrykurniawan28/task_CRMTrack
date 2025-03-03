@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 part of 'models.dart';
 
 class TaskDetail {
@@ -10,6 +11,10 @@ class TaskDetail {
   SenderDetail sender;
   CustomerDetail customer;
   ProductDetail product;
+  TimeOfDay startTime;
+  TimeOfDay endTime;
+  bool isComplete;
+  String type; //isi 'Follow up' atau 'Meeting'
 
   TaskDetail({
     this.id,
@@ -21,13 +26,39 @@ class TaskDetail {
     required this.sender,
     required this.customer,
     required this.product,
+    required this.endTime,
+    required this.startTime,
+    required this.isComplete,
+    required this.type,
   });
+
+  TaskDetail copyWith({TaskStatus? status}) {
+    return TaskDetail(
+      id: id,
+      title: title,
+      desc: desc,
+      dueDate: dueDate,
+      priority: priority,
+      status: status ?? this.status,
+      sender: sender,
+      customer: customer,
+      product: product,
+      startTime: startTime,
+      endTime: endTime,
+      isComplete: isComplete,
+      type: type,
+    );
+  }
 
   factory TaskDetail.fromJson(Map<String, dynamic> json) {
     return TaskDetail(
       id: json['id'],
       title: json['title'],
       desc: json['desc'],
+      endTime: json['endTime'],
+      startTime: json['startTime'],
+      isComplete: json['is_complete'],
+      type: json['type'],
       dueDate: DateTime.parse(json['dueDate']),
       priority: TaskPriority.values[json['priority']],
       status: TaskStatus.values[json['status']],
@@ -42,6 +73,8 @@ class TaskDetail {
       'id': id,
       'title': title,
       'desc': desc,
+      'endTime': endTime,
+      'startTime': startTime,
       'dueDate': dueDate.toIso8601String(),
       'priority': priority.index,
       'status': status.index,
@@ -150,74 +183,182 @@ class ProductDetail {
   }
 }
 
-List<TaskDetail> dummyTask = [
-  TaskDetail(
-    id: 1,
-    title: 'Task 1',
-    desc: 'Description 1',
-    dueDate: DateTime.now(),
-    priority: TaskPriority.high,
-    status: TaskStatus.notStarted,
-    sender: SenderDetail(
-      assignor: 'Assignor 1',
-      cc: ['CC 1', 'CC 2'],
-    ),
-    customer: CustomerDetail(
-      name: 'Customer 1',
-      email: 'customer@email.com',
-      phone: '08123456789',
-      jobTitle: 'Job Title 1',
-      company: 'Company 1',
-    ),
-    product: ProductDetail(
-      name: 'Product 1',
-      businessLine: 'Business Line 1',
-    ),
-  ),
-  TaskDetail(
-    id: 2,
-    title: 'Task 2',
-    desc: 'Description 2',
-    dueDate: DateTime.now(),
-    priority: TaskPriority.normal,
-    status: TaskStatus.inProgress,
-    sender: SenderDetail(
-      assignor: 'Assignor 2',
-      cc: ['CC 3', 'CC 4'],
-    ),
-    customer: CustomerDetail(
-      name: 'Customer 2',
-      email: 'customer2@gmail.com',
-      phone: '08123456789',
-      jobTitle: 'Job Title 2',
-      company: 'Company 2',
-    ),
-    product: ProductDetail(
-      name: 'Product 2',
-      businessLine: 'Business Line 2',
-    ),
-  ),
-  TaskDetail(
-    id: 3,
-    title: 'Task 2',
-    desc: 'Description 2',
-    dueDate: DateTime.now(),
-    priority: TaskPriority.low,
-    status: TaskStatus.inProgress,
-    sender: SenderDetail(
-      assignor: 'Assignor 2',
-      cc: ['CC 3', 'CC 4'],
-    ),
-    customer: CustomerDetail(
-      name: 'Customer 2',
-      email: 'customer2@gmail.com',
-      phone: '08123456789',
-      jobTitle: 'Job Title 2',
-      company: 'Company 2',
-    ),
-    product: ProductDetail(
-      name: 'Product 2',
-      businessLine: 'Business Line 2',
-    ),
-  ),
-];
+// List<TaskDetail> dummyTask = [
+//   TaskDetail(
+//     id: 1,
+//     title: "Meeting with Client",
+//     desc: "Discuss project timeline and deliverables",
+//     dueDate: DateTime.now().add(Duration(days: 2)),
+//     priority: TaskPriority.high,
+//     status: TaskStatus.inProgress,
+//     sender: SenderDetail(assignor: "John Doe", cc: ["jane@example.com"]),
+//     customer: CustomerDetail(
+//       name: "Alice Brown",
+//       email: "alice@example.com",
+//       phone: "1234567890",
+//       jobTitle: "Project Manager",
+//       company: "ABC Corp",
+//     ),
+//     product: ProductDetail(name: "CRM Software", businessLine: "IT Solutions"),
+//   ),
+//   TaskDetail(
+//     id: 2,
+//     title: "Code Review",
+//     desc: "Review the latest code changes before merging",
+//     dueDate: DateTime.now().add(Duration(days: 4)),
+//     priority: TaskPriority.normal,
+//     status: TaskStatus.notStarted,
+//     sender: SenderDetail(assignor: "Jane Smith", cc: ["dev@example.com"]),
+//     customer: CustomerDetail(
+//       name: "Bob Williams",
+//       email: "bob@example.com",
+//       phone: "9876543210",
+//       jobTitle: "Lead Developer",
+//       company: "XYZ Ltd",
+//     ),
+//     product:
+//         ProductDetail(name: "Web App", businessLine: "Software Development"),
+//   ),
+//   TaskDetail(
+//     id: 3,
+//     title: "Prepare Financial Report",
+//     desc: "Compile Q3 financial report for board meeting",
+//     dueDate: DateTime.now().add(Duration(days: 7)),
+//     priority: TaskPriority.high,
+//     status: TaskStatus.notStarted,
+//     sender:
+//         SenderDetail(assignor: "Michael Scott", cc: ["finance@example.com"]),
+//     customer: CustomerDetail(
+//       name: "Sarah Connor",
+//       email: "sarah@example.com",
+//       phone: "555666777",
+//       jobTitle: "CFO",
+//       company: "TechCorp",
+//     ),
+//     product:
+//         ProductDetail(name: "Accounting Software", businessLine: "Finance"),
+//   ),
+//   TaskDetail(
+//     id: 4,
+//     title: "UI Design Update",
+//     desc: "Improve user interface based on feedback",
+//     dueDate: DateTime.now().add(Duration(days: 3)),
+//     priority: TaskPriority.normal,
+//     status: TaskStatus.inProgress,
+//     sender: SenderDetail(assignor: "Emily Davis", cc: ["uiux@example.com"]),
+//     customer: CustomerDetail(
+//       name: "Tom Hardy",
+//       email: "tom@example.com",
+//       phone: "444555666",
+//       jobTitle: "UI/UX Designer",
+//       company: "Creative Inc",
+//     ),
+//     product:
+//         ProductDetail(name: "Mobile App", businessLine: "Design & Development"),
+//   ),
+//   TaskDetail(
+//     id: 5,
+//     title: "Marketing Strategy Meeting",
+//     desc: "Plan social media campaign for Q4",
+//     dueDate: DateTime.now().add(Duration(days: 5)),
+//     priority: TaskPriority.low,
+//     status: TaskStatus.deffered,
+//     sender:
+//         SenderDetail(assignor: "Robert King", cc: ["marketing@example.com"]),
+//     customer: CustomerDetail(
+//       name: "Emma Watson",
+//       email: "emma@example.com",
+//       phone: "111222333",
+//       jobTitle: "Marketing Director",
+//       company: "AdWorld",
+//     ),
+//     product: ProductDetail(name: "Brand Campaign", businessLine: "Marketing"),
+//   ),
+//   TaskDetail(
+//     id: 6,
+//     title: "Bug Fixes",
+//     desc: "Fix reported bugs from testing phase",
+//     dueDate: DateTime.now().add(Duration(days: 1)),
+//     priority: TaskPriority.high,
+//     status: TaskStatus.inProgress,
+//     sender: SenderDetail(assignor: "Chris Evans", cc: ["qa@example.com"]),
+//     customer: CustomerDetail(
+//       name: "Steve Rogers",
+//       email: "steve@example.com",
+//       phone: "777888999",
+//       jobTitle: "QA Engineer",
+//       company: "Shield Tech",
+//     ),
+//     product: ProductDetail(name: "Cybersecurity App", businessLine: "Security"),
+//   ),
+//   TaskDetail(
+//     id: 7,
+//     title: "Data Migration",
+//     desc: "Migrate customer data to new database",
+//     dueDate: DateTime.now().add(Duration(days: 6)),
+//     priority: TaskPriority.normal,
+//     status: TaskStatus.completed,
+//     sender: SenderDetail(assignor: "Tony Stark", cc: ["it@example.com"]),
+//     customer: CustomerDetail(
+//       name: "Bruce Wayne",
+//       email: "bruce@example.com",
+//       phone: "333444555",
+//       jobTitle: "CTO",
+//       company: "Wayne Enterprises",
+//     ),
+//     product: ProductDetail(name: "Cloud Storage", businessLine: "IT Solutions"),
+//   ),
+//   TaskDetail(
+//     id: 8,
+//     title: "Product Demo",
+//     desc: "Showcase new features to stakeholders",
+//     dueDate: DateTime.now().add(Duration(days: 8)),
+//     priority: TaskPriority.high,
+//     status: TaskStatus.notStarted,
+//     sender: SenderDetail(assignor: "Peter Parker", cc: ["sales@example.com"]),
+//     customer: CustomerDetail(
+//       name: "Clark Kent",
+//       email: "clark@example.com",
+//       phone: "999000111",
+//       jobTitle: "VP Sales",
+//       company: "Daily Planet",
+//     ),
+//     product: ProductDetail(name: "E-commerce Platform", businessLine: "Retail"),
+//   ),
+//   TaskDetail(
+//     id: 9,
+//     title: "Server Maintenance",
+//     desc: "Perform scheduled maintenance on production servers",
+//     dueDate: DateTime.now().add(Duration(days: 10)),
+//     priority: TaskPriority.high,
+//     status: TaskStatus.inProgress,
+//     sender:
+//         SenderDetail(assignor: "Natasha Romanoff", cc: ["devops@example.com"]),
+//     customer: CustomerDetail(
+//       name: "Nick Fury",
+//       email: "nick@example.com",
+//       phone: "555999000",
+//       jobTitle: "Director",
+//       company: "SHIELD",
+//     ),
+//     product:
+//         ProductDetail(name: "Cloud Hosting", businessLine: "Infrastructure"),
+//   ),
+//   TaskDetail(
+//     id: 10,
+//     title: "HR Policy Update",
+//     desc: "Revise company policies for remote work",
+//     dueDate: DateTime.now().add(Duration(days: 12)),
+//     priority: TaskPriority.low,
+//     status: TaskStatus.completed,
+//     sender: SenderDetail(assignor: "Bruce Banner", cc: ["hr@example.com"]),
+//     customer: CustomerDetail(
+//       name: "Diana Prince",
+//       email: "diana@example.com",
+//       phone: "123123123",
+//       jobTitle: "HR Manager",
+//       company: "Amazonia Ltd",
+//     ),
+//     product: ProductDetail(name: "Employee Handbook", businessLine: "HR"),
+//   ),
+// ];

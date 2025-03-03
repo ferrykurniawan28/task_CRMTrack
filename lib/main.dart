@@ -1,4 +1,3 @@
-
 import 'package:crm_track/cubit/notification/notification_cubit.dart';
 import 'package:crm_track/cubit/task_list/task_list_cubit.dart';
 import 'package:crm_track/routes/routes.dart';
@@ -19,7 +18,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Modular.setInitialRoute('/auth/splash');
+    Modular.setInitialRoute('/home');
     return MultiBlocProvider(
       providers: [
         BlocProvider(
