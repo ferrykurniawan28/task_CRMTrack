@@ -97,7 +97,7 @@ class _OpportunityAddState extends State<OpportunityAdd> {
           content: Text('Opportunity added successfully'),
         ),
       );
-      Modular.to.navigate('/opportunity-management');
+      Modular.to.pop();
     }
   }
 
