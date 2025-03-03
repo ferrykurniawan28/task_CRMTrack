@@ -40,36 +40,10 @@ class _ProspectActionState extends State<ProspectAction> {
     exportBackgroundColor: Colors.white,
   );
 
-  Future<void> _loadSignature(Uint8List signatureBytes) async {
-    final img.Image? signatureImage = img.decodeImage(signatureBytes);
-    if (signatureImage != null) {
-      for (int y = 0; y < signatureImage.height; y++) {
-        for (int x = 0; x < signatureImage.width; x++) {
-          if (signatureImage.getPixel(x, y) == Colors.black.value) {
-            _controller.addPoint(
-              Point(
-                Offset(x.toDouble(), y.toDouble()),
-                PointType.tap,
-                5,
-              ),
-            );
-          }
-        }
-      }
-    }
-    _controller.disabled = true;
-  }
-
-  Future<String?> _getVideoThumbnail(String videoPath) async {
-    final tempDir = await getTemporaryDirectory();
-    return await VideoThumbnail.thumbnailFile(
-      video: videoPath,
-      thumbnailPath: '${tempDir.path}/thumb_${videoPath.split('/').last}.jpg',
-      imageFormat: ImageFormat.JPEG,
-      maxWidth: 200, // Adjust size as needed
-      quality: 75,
-    );
-  }
+  // Future<void> _loadSignature(Uint8List signatureBytes) async {
+  //   _controller.clear();
+  //   _controller.importSignature(signatureBytes);
+  // }
 
   void submit() async {
     widget.staging.title = _titleController.text;
@@ -108,11 +82,22 @@ class _ProspectActionState extends State<ProspectAction> {
     setState(() {});
   }
 
+  Future<String?> _getVideoThumbnail(String videoPath) async {
+    final tempDir = await getTemporaryDirectory();
+    return await VideoThumbnail.thumbnailFile(
+      video: videoPath,
+      thumbnailPath: '${tempDir.path}/thumb_${videoPath.split('/').last}.jpg',
+      imageFormat: ImageFormat.JPEG,
+      maxWidth: 200, // Adjust size as needed
+      quality: 75,
+    );
+  }
+
   @override
   void initState() {
     super.initState();
-    if (widget.staging.signature != null) {
-      _loadSignature(widget.staging.signature!);
+    if (widget.staging.isCompleted) {
+      _controller.disabled = true;
     }
   }
 
@@ -390,50 +375,71 @@ class _ProspectActionState extends State<ProspectAction> {
                                           widget.staging.long != null) ||
                                       (_selectedLat != null &&
                                           _selectedLng != null))
-                                  ? FlutterMap(
-                                      options: MapOptions(
-                                        initialCenter: (widget.staging.lat !=
-                                                    null &&
-                                                widget.staging.long != null)
-                                            ? LatLng(widget.staging.lat!,
-                                                widget.staging.long!)
-                                            : LatLng(
-                                                _selectedLat!, _selectedLng!),
-                                        initialZoom: 9.2,
-                                      ),
+                                  ? Stack(
                                       children: [
-                                        TileLayer(
-                                          urlTemplate:
-                                              'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                                          userAgentPackageName:
-                                              'com.example.app',
+                                        FlutterMap(
+                                          options: MapOptions(
+                                            initialCenter:
+                                                (widget.staging.lat != null &&
+                                                        widget.staging.long !=
+                                                            null)
+                                                    ? LatLng(
+                                                        widget.staging.lat!,
+                                                        widget.staging.long!)
+                                                    : LatLng(_selectedLat!,
+                                                        _selectedLng!),
+                                            initialZoom: 9.2,
+                                          ),
+                                          children: [
+                                            TileLayer(
+                                              urlTemplate:
+                                                  'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                              userAgentPackageName:
+                                                  'com.example.app',
+                                            ),
+                                            MarkerLayer(markers: [
+                                              if (widget.staging.lat != null &&
+                                                  widget.staging.long != null)
+                                                Marker(
+                                                  width: 80.0,
+                                                  height: 80.0,
+                                                  point: LatLng(
+                                                      widget.staging.lat!,
+                                                      widget.staging.long!),
+                                                  child: Icon(
+                                                    Icons.location_on,
+                                                    color: primaryColor,
+                                                  ),
+                                                ),
+                                              if (_selectedLat != null &&
+                                                  _selectedLng != null)
+                                                Marker(
+                                                  width: 80.0,
+                                                  height: 80.0,
+                                                  point: LatLng(_selectedLat!,
+                                                      _selectedLng!),
+                                                  child: Icon(
+                                                    Icons.location_on,
+                                                    color: primaryColor,
+                                                  ),
+                                                ),
+                                            ]),
+                                          ],
                                         ),
-                                        MarkerLayer(markers: [
-                                          if (widget.staging.lat != null &&
-                                              widget.staging.long != null)
-                                            Marker(
-                                              width: 80.0,
-                                              height: 80.0,
-                                              point: LatLng(widget.staging.lat!,
-                                                  widget.staging.long!),
-                                              child: Icon(
-                                                Icons.location_on,
+                                        Align(
+                                          alignment: Alignment.topRight,
+                                          child: IconButton(
+                                              onPressed: () {
+                                                setState(() {
+                                                  _selectedLat = null;
+                                                  _selectedLng = null;
+                                                });
+                                              },
+                                              icon: Icon(
+                                                Icons.close,
                                                 color: primaryColor,
-                                              ),
-                                            ),
-                                          if (_selectedLat != null &&
-                                              _selectedLng != null)
-                                            Marker(
-                                              width: 80.0,
-                                              height: 80.0,
-                                              point: LatLng(
-                                                  _selectedLat!, _selectedLng!),
-                                              child: Icon(
-                                                Icons.location_on,
-                                                color: primaryColor,
-                                              ),
-                                            ),
-                                        ]),
+                                              )),
+                                        ),
                                       ],
                                     )
                                   : Center(
@@ -561,6 +567,18 @@ class _ProspectActionState extends State<ProspectAction> {
                                     widget.staging.documents?.join(', ') ??
                                     'No Document',
                                 overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            const Spacer(),
+                            IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _document = null;
+                                });
+                              },
+                              icon: Icon(
+                                Icons.delete_outline,
+                                color: primaryColor,
                               ),
                             ),
                           ],
@@ -692,12 +710,30 @@ class _ProspectActionState extends State<ProspectAction> {
                                     ),
                                     borderRadius: BorderRadius.circular(7),
                                   ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(7),
-                                    child: Image.file(
-                                      File(image.path!),
-                                      fit: BoxFit.cover,
-                                    ),
+                                  child: Stack(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(7),
+                                        child: Image.file(
+                                          File(image.path!),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment: Alignment.topRight,
+                                        child: IconButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              _images!.removeAt(index);
+                                            });
+                                          },
+                                          icon: Icon(
+                                            Icons.delete_outline,
+                                            color: primaryColor,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 );
                               } else {
@@ -785,6 +821,11 @@ class _ProspectActionState extends State<ProspectAction> {
                           ),
                           child: Stack(
                             children: [
+                              if (widget.staging.signature != null)
+                                Image.memory(
+                                  widget.staging.signature!,
+                                  fit: BoxFit.contain,
+                                ),
                               Signature(
                                 controller: _controller,
                                 width: double.infinity,
@@ -899,13 +940,19 @@ class _ProspectActionState extends State<ProspectAction> {
           color: Color(0xFF899197),
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(16),
           borderSide: const BorderSide(
             color: Color(0xFFC6C7C8),
           ),
         ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(
+            color: Color(0xFFE6E6E6),
+          ),
+        ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(
             color: primaryColor,
           ),

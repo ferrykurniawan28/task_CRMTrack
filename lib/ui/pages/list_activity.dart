@@ -39,6 +39,12 @@ class ListActivityScreen extends StatelessWidget {
                   horizontal: 16,
                   vertical: 8,
                 ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFE6E6E6),
+                  ),
+                ),
               ),
             ),
           ),
