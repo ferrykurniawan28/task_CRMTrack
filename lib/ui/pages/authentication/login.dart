@@ -200,6 +200,12 @@ Widget customTextForm({
               color: Color(0xFFE6E6E6),
             ),
           ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: const BorderSide(
+              color: Color(0xFFE6E6E6),
+            ),
+          ),
           suffixIcon: isPassword
               ? IconButton(
                   icon: Icon(
