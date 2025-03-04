@@ -45,7 +45,7 @@ class _WorkflowWidgetState extends State<WorkflowWidget> {
             Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children: const [
                   WorkFlowCard(
                     number: '12',
                     title: 'On going',

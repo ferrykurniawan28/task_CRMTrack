@@ -11,7 +11,7 @@ class TaskCubit extends Cubit<TaskState> {
   void getTasks() async {
     emit(TaskLoading());
     try {
-      final tasks = await dummyTask;
+      final tasks = dummyTask;
       emit(TaskLoaded(tasks));
     } catch (e) {
       emit(TaskError(e.toString()));

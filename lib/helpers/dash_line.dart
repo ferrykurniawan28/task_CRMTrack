@@ -27,10 +27,12 @@ class DashedLinePainter extends CustomPainter {
 }
 
 class DashedLineWidget extends StatelessWidget {
+  const DashedLineWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      size: Size(double.infinity, 1), // Lebar penuh
+      size: const Size(double.infinity, 1), // Lebar penuh
       painter: DashedLinePainter(),
     );
   }

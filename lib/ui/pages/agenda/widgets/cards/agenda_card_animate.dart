@@ -8,12 +8,13 @@ import 'focus_agenda_detail_card.dart';
 import 'update_status_agenda.dart';
 
 void _updateAgenda(TaskStatus dataStatus, int? id, BuildContext context) {
-  print('STATUS AWAL');
-  print(dataStatus);
+  // print('STATUS AWAL');
+  // print(dataStatus);
 
   showModalBottomSheet(
     context: context,
     backgroundColor: Colors.white,
+    isScrollControlled: true,
     shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
     builder: (context) {
@@ -27,10 +28,11 @@ void _updateAgenda(TaskStatus dataStatus, int? id, BuildContext context) {
 
 class AgendaCardAnimateNow extends StatefulWidget {
   final TaskDetail data;
-  bool isExpanded;
-  String timeRange;
-  Function(bool) onChange;
-  AgendaCardAnimateNow({
+  final bool isExpanded;
+  final String timeRange;
+  final Function(bool) onChange;
+
+  const AgendaCardAnimateNow({
     super.key,
     required this.data,
     required this.isExpanded,
@@ -45,16 +47,16 @@ class AgendaCardAnimateNow extends StatefulWidget {
 class _AgendaCardAnimateNowState extends State<AgendaCardAnimateNow> {
   @override
   Widget build(BuildContext context) {
-    var _isExpanded = widget.isExpanded;
-    var _data = widget.data;
+    var isExpanded = widget.isExpanded;
+    var data = widget.data;
     return Column(
       children: [
         GestureDetector(
           onTap: () {
             setState(() {
-              _isExpanded = !_isExpanded;
+              isExpanded = !isExpanded;
             });
-            widget.onChange(_isExpanded);
+            widget.onChange(isExpanded);
           },
           child: AnimatedSwitcher(
             transitionBuilder: (child, animation) {
@@ -63,24 +65,24 @@ class _AgendaCardAnimateNowState extends State<AgendaCardAnimateNow> {
                 child: child,
               );
             },
-            duration: Duration(milliseconds: 300),
-            child: _isExpanded
+            duration: const Duration(milliseconds: 300),
+            child: isExpanded
                 ? FocusAgendaDetailCard(
-                    customer: _data.customer.company,
-                    title: _data.title,
-                    desc: _data.desc,
-                    date: formatDateText(_data.dueDate),
+                    customer: data.customer.company,
+                    title: data.title,
+                    desc: data.desc,
+                    date: formatDateText(data.dueDate),
                     rangeTime: widget.timeRange,
-                    priority: _data.priority.name,
+                    priority: data.priority.name,
                     callbak: () {
-                      _updateAgenda(_data.status, _data.id, context);
+                      _updateAgenda(data.status, data.id, context);
                     },
                   )
                 : AgendaNow(
-                    desc: _data.desc,
-                    endTime: _data.endTime,
-                    startTime: _data.startTime,
-                    title: _data.title,
+                    desc: data.desc,
+                    endTime: data.endTime,
+                    startTime: data.startTime,
+                    title: data.title,
                   ),
           ),
         ),
@@ -92,10 +94,11 @@ class _AgendaCardAnimateNowState extends State<AgendaCardAnimateNow> {
 
 class AgendaCardAnimate extends StatefulWidget {
   final TaskDetail data;
-  bool isExpanded;
-  String timeRange;
-  Function(bool) onChange;
-  AgendaCardAnimate({
+  final bool isExpanded;
+  final String timeRange;
+  final Function(bool) onChange;
+
+  const AgendaCardAnimate({
     super.key,
     required this.data,
     required this.isExpanded,
@@ -108,21 +111,28 @@ class AgendaCardAnimate extends StatefulWidget {
 }
 
 class _AgendaCardAnimateState extends State<AgendaCardAnimate> {
+  late bool isExpanded;
+
+  @override
+  void initState() {
+    super.initState();
+    isExpanded = widget.isExpanded;
+  }
+
   @override
   Widget build(BuildContext context) {
-    var _isExpanded = widget.isExpanded;
-    var _data = widget.data;
+    var data = widget.data;
 
     return Column(
       children: [
         GestureDetector(
           onTap: () {
-            print('CARD EXPANDED');
+            // print('CARD EXPANDED');
             setState(() {
               // Toggle the expansion state
-              _isExpanded = !_isExpanded;
+              isExpanded = !isExpanded;
             });
-            widget.onChange(_isExpanded);
+            widget.onChange(isExpanded);
           },
           child: AnimatedSwitcher(
             transitionBuilder: (child, animation) {
@@ -131,25 +141,25 @@ class _AgendaCardAnimateState extends State<AgendaCardAnimate> {
                 child: child,
               );
             },
-            duration: Duration(milliseconds: 300),
-            child: widget.isExpanded
+            duration: const Duration(milliseconds: 300),
+            child: isExpanded
                 ? FocusAgendaDetailCard(
-                    customer: _data.customer.company,
-                    title: _data.title,
-                    desc: _data.desc,
-                    date: formatDateText(_data.dueDate),
+                    customer: data.customer.company,
+                    title: data.title,
+                    desc: data.desc,
+                    date: formatDateText(data.dueDate),
                     rangeTime: widget.timeRange,
-                    priority: _data.priority.name,
+                    priority: data.priority.name,
                     callbak: () {
-                      _updateAgenda(_data.status, _data.id, context);
+                      _updateAgenda(data.status, data.id, context);
                     },
                   )
                 : AgendaCard(
-                    desc: _data.desc,
-                    endTime: _data.endTime,
-                    startTime: _data.startTime,
-                    title: _data.title,
-                    color: getPriorityColor(_data.priority.name),
+                    desc: data.desc,
+                    endTime: data.endTime,
+                    startTime: data.startTime,
+                    title: data.title,
+                    color: getPriorityColor(data.priority.name),
                   ),
           ),
         ),

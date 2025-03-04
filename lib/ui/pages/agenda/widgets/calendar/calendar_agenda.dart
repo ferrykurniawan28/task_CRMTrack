@@ -6,9 +6,9 @@ import '../../../../../helpers/helpers.dart';
 
 class CalendarAgenda extends StatefulWidget {
   final Function(DateTime) onDateSelected;
-  DateTime selectedDate;
+  final DateTime selectedDate;
   final Function(DateTime) onMonthChange;
-  CalendarAgenda({
+  const CalendarAgenda({
     super.key,
     required this.onDateSelected,
     required this.selectedDate,
@@ -21,20 +21,19 @@ class CalendarAgenda extends StatefulWidget {
 
 class _CalendarAgendaState extends State<CalendarAgenda> {
   late DateTime _focusedDay;
+  late DateTime _selectedDay;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _focusedDay = widget.selectedDate;
+    _selectedDay = widget.selectedDate;
   }
 
   @override
   Widget build(BuildContext context) {
-    DateTime _selectedDay = widget.selectedDate;
-
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         color: Colors.white,
@@ -55,7 +54,6 @@ class _CalendarAgendaState extends State<CalendarAgenda> {
               setState(() {
                 _selectedDay = selectedDay;
                 _focusedDay = focusedDay;
-                print('day ${_selectedDay} ${_focusedDay}');
               });
               widget.onDateSelected(_selectedDay);
             },
@@ -65,7 +63,7 @@ class _CalendarAgendaState extends State<CalendarAgenda> {
               });
               widget.onMonthChange(focusedDay);
             },
-            headerStyle: HeaderStyle(
+            headerStyle: const HeaderStyle(
               titleTextStyle: TextStyle(color: Colors.transparent),
               titleCentered: false,
               formatButtonShowsNext: false,
@@ -73,7 +71,7 @@ class _CalendarAgendaState extends State<CalendarAgenda> {
               leftChevronVisible: false,
               rightChevronVisible: false,
             ),
-            calendarStyle: CalendarStyle(
+            calendarStyle: const CalendarStyle(
               selectedDecoration: BoxDecoration(
                 color: kColorLightGrey,
                 shape: BoxShape.circle,
@@ -85,7 +83,7 @@ class _CalendarAgendaState extends State<CalendarAgenda> {
               weekendTextStyle: TextStyle(color: kColorRed),
             ),
             daysOfWeekStyle: DaysOfWeekStyle(
-              weekendStyle: TextStyle(color: kColorRed),
+              weekendStyle: const TextStyle(color: kColorRed),
               dowTextFormatter: (date, locale) {
                 return ['M', 'T', 'W', 'T', 'F', 'S', 'S'][date.weekday - 1];
               },

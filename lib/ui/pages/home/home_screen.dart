@@ -27,98 +27,96 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
-        child: Column(
-          children: [
-            spacerHeight(20),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 16,
-              ),
-              child: HomeAppbar(),
+      body: Column(
+        children: [
+          spacerHeight(20),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 16,
             ),
-            spacerHeight(16),
-            SizedBox(
-              height: 130,
-              child: PageView.builder(
-                controller: _pageController,
-                itemCount: 3,
-                onPageChanged: (index) {
-                  setState(() {
-                    _selectedIndex = index;
-                  });
-                },
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () => Modular.to.pushNamed('/workflow'),
-                    child: WorkflowWidget(),
-                  );
-                },
-              ),
+            child: HomeAppbar(),
+          ),
+          spacerHeight(16),
+          SizedBox(
+            height: 130,
+            child: PageView.builder(
+              controller: _pageController,
+              itemCount: 3,
+              onPageChanged: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () => Modular.to.pushNamed('/workflow'),
+                  child: WorkflowWidget(),
+                );
+              },
             ),
-            spacerHeight(8),
+          ),
+          spacerHeight(8),
 
-            ///workflow indicator
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                3,
-                (index) => AnimatedContainer(
-                  duration: Duration(microseconds: 300),
-                  margin: EdgeInsets.symmetric(horizontal: 4),
-                  height: 6,
-                  width: _selectedIndex == index ? 24 : 6,
-                  decoration: BoxDecoration(
-                    color: _selectedIndex == index
-                        ? Colors.red
-                        : Color.fromRGBO(217, 217, 217, 1),
-                    borderRadius: BorderRadius.circular(6),
+          ///workflow indicator
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+              3,
+              (index) => AnimatedContainer(
+                duration: Duration(microseconds: 300),
+                margin: EdgeInsets.symmetric(horizontal: 4),
+                height: 6,
+                width: _selectedIndex == index ? 24 : 6,
+                decoration: BoxDecoration(
+                  color: _selectedIndex == index
+                      ? Colors.red
+                      : Color.fromRGBO(217, 217, 217, 1),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+              ),
+            ),
+          ),
+
+          ///menu
+          Container(
+            margin: EdgeInsets.only(top: 12),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  CardMenu(
+                      onTap: () => Modular.to.pushNamed('/marketing-toolkit'),
+                      icon: Image.asset('assets/icon/tools.png'),
+                      title: 'Marketing\nToolkit'),
+                  CardMenu(
+                      onTap: () =>
+                          Modular.to.pushNamed('/opportunity-management'),
+                      icon: Image.asset('assets/icon/lightbulb.png'),
+                      title: 'Opportunity\nManagement'),
+                  CardMenu(
+                      icon: Image.asset('assets/icon/funnel.png'),
+                      title: 'Funnel\nSummary'),
+                  CardMenu(
+                      onTap: () => Modular.to.pushNamed('/list-activity'),
+                      icon: Image.asset('assets/icon/activity.png'),
+                      title: 'List\nActivity'),
+                  CardMenu(
+                    icon: Image.asset('assets/icon/file-person.png'),
+                    title: 'Contact\nManagement',
                   ),
-                ),
+                ],
               ),
             ),
-
-            ///menu
-            Container(
-              margin: EdgeInsets.only(top: 12),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    CardMenu(
-                        onTap: () => Modular.to.pushNamed('/marketing-toolkit'),
-                        icon: Image.asset('assets/icon/tools.png'),
-                        title: 'Marketing\nToolkit'),
-                    CardMenu(
-                        onTap: () =>
-                            Modular.to.pushNamed('/opportunity-management'),
-                        icon: Image.asset('assets/icon/lightbulb.png'),
-                        title: 'Opportunity\nManagement'),
-                    CardMenu(
-                        icon: Image.asset('assets/icon/funnel.png'),
-                        title: 'Funnel\nSummary'),
-                    CardMenu(
-                        onTap: () => Modular.to.pushNamed('/list-activity'),
-                        icon: Image.asset('assets/icon/activity.png'),
-                        title: 'List\nActivity'),
-                    CardMenu(
-                      icon: Image.asset('assets/icon/file-person.png'),
-                      title: 'Contact\nManagement',
-                    ),
-                  ],
-                ),
-              ),
+          ),
+          spacerHeight(16),
+          Expanded(
+            child: BlocProvider(
+              create: (context) => TaskCubit(),
+              child: HomeTaskListWidget(),
             ),
-            spacerHeight(16),
-            Expanded(
-              child: BlocProvider(
-                create: (context) => TaskCubit(),
-                child: HomeTaskListWidget(),
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
