@@ -8,13 +8,15 @@ class AgendaCard extends StatelessWidget {
   final String title;
   final String desc;
   final Color color;
-  const AgendaCard(
-      {super.key,
-      required this.desc,
-      required this.endTime,
-      required this.startTime,
-      required this.title,
-      required this.color});
+
+  const AgendaCard({
+    super.key,
+    required this.desc,
+    required this.endTime,
+    required this.startTime,
+    required this.title,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,23 +25,23 @@ class AgendaCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         color: color,
       ),
-      padding: EdgeInsets.only(top: 1, bottom: 1, right: 1, left: 6),
+      padding: const EdgeInsets.only(top: 1, bottom: 1, right: 1, left: 6),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
         ),
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         child: Row(
           children: [
-            Container(
+            SizedBox(
               width: 90,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     startTime.format(context).toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                       color: Colors.black,
@@ -47,12 +49,12 @@ class AgendaCard extends StatelessWidget {
                   ),
                   Text(
                     endTime.format(context),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
                       color: kColorGrey,
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -64,15 +66,15 @@ class AgendaCard extends StatelessWidget {
               width: 10,
               height: 10,
             ),
-            spacerWidth(20),
+            const SizedBox(width: 20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
+                SizedBox(
                   width: 200,
                   child: Text(
                     title,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
                     ),
@@ -81,13 +83,13 @@ class AgendaCard extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Container(
+                    SizedBox(
                       width: 150,
                       child: Text(
                         desc,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: kColorGrey,
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
@@ -110,6 +112,7 @@ class AgendaNow extends StatelessWidget {
   final TimeOfDay endTime;
   final String title;
   final String desc;
+
   const AgendaNow({
     super.key,
     required this.desc,
@@ -125,23 +128,23 @@ class AgendaNow extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         color: kColorRed,
       ),
-      padding: EdgeInsets.only(top: 1, bottom: 1, right: 1, left: 6),
+      padding: const EdgeInsets.only(top: 1, bottom: 1, right: 1, left: 6),
       child: Container(
         decoration: BoxDecoration(
           color: kColorRed,
           borderRadius: BorderRadius.circular(12),
         ),
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         child: Row(
           children: [
-            Container(
+            SizedBox(
               width: 90,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     startTime.format(context).toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                       color: Colors.white,
@@ -149,20 +152,21 @@ class AgendaNow extends StatelessWidget {
                   ),
                   Text(
                     endTime.format(context),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
                       color: Colors.white,
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
             Container(
-              padding: EdgeInsets.all(3),
+              padding: const EdgeInsets.all(3),
               decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white, width: 1),
-                  borderRadius: BorderRadius.circular(10)),
+                border: Border.all(color: Colors.white, width: 1),
+                borderRadius: BorderRadius.circular(10),
+              ),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
@@ -172,13 +176,13 @@ class AgendaNow extends StatelessWidget {
                 height: 10,
               ),
             ),
-            spacerWidth(20),
+            const SizedBox(width: 20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
                     color: Colors.white,
@@ -186,7 +190,7 @@ class AgendaNow extends StatelessWidget {
                 ),
                 Text(
                   desc,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 12,
                     fontWeight: FontWeight.w400,

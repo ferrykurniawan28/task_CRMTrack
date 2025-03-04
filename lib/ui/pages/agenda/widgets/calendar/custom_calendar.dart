@@ -34,7 +34,7 @@ class CustomCalendarToday extends StatelessWidget {
                 ),
               ),
               spacerHeight(6),
-              Container(
+              SizedBox(
                 width: 25,
                 child: Text(
                   dayName,
@@ -83,7 +83,7 @@ class CustomCalendarSelected extends StatelessWidget {
                 ),
               ),
               spacerHeight(6),
-              Container(
+              SizedBox(
                 width: 25,
                 child: Text(
                   dayName,
@@ -131,7 +131,7 @@ class CustomCalendar extends StatelessWidget {
                 ),
               ),
               spacerHeight(6),
-              Container(
+              SizedBox(
                 width: 25,
                 child: Text(
                   dayName,

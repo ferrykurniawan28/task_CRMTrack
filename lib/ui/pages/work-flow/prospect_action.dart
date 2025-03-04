@@ -1,13 +1,10 @@
 import 'dart:io';
-import 'dart:math';
-import 'dart:typed_data';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:image/image.dart' as img;
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:open_file/open_file.dart';
@@ -39,11 +36,6 @@ class _ProspectActionState extends State<ProspectAction> {
     penColor: Colors.black,
     exportBackgroundColor: Colors.white,
   );
-
-  // Future<void> _loadSignature(Uint8List signatureBytes) async {
-  //   _controller.clear();
-  //   _controller.importSignature(signatureBytes);
-  // }
 
   void submit() async {
     widget.staging.title = _titleController.text;
