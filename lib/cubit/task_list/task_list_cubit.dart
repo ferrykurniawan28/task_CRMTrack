@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-
 import '../../constants/dummy_data.dart';
 import '../../models/models.dart';
 

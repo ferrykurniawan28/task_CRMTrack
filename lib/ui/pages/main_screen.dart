@@ -1,4 +1,4 @@
-import 'package:crm_track/ui/pages/add_task.dart';
+import 'package:crm_track/ui/pages/agenda/agenda.dart';
 import 'package:crm_track/ui/pages/home/home_screen.dart';
 import 'package:crm_track/ui/pages/profile_screen.dart';
 import 'package:crm_track/ui/pages/task/task_list.dart';
