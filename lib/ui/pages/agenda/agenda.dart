@@ -9,7 +9,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../../../cubit/task/task_cubit.dart';
 import '../../../helpers/filter.dart';
 import '../../../helpers/helpers.dart';
-import '../../../models/task_detail.dart';
+
 import '../../widgets/header_list.dart';
 import 'widgets/cards/agenda_card.dart';
 import 'widgets/calendar/calendar_agenda.dart';
@@ -41,12 +41,12 @@ class _AgendaState extends State<Agenda> {
   }
 
   void _onScroll() {
-    if (_scrollController.offset > 20 && !_isSmallCalendar) {
+    if (_scrollController.offset > 10 && !_isSmallCalendar) {
       setState(() {
         _calendarHeight = 140.0;
         _isSmallCalendar = true;
       });
-    } else if (_scrollController.offset <= 20 && _isSmallCalendar) {
+    } else if (_scrollController.offset <= 10 && _isSmallCalendar) {
       setState(() {
         _calendarHeight = 350.0;
         _isSmallCalendar = false;

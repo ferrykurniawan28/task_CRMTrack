@@ -1,8 +1,8 @@
-import 'package:crm_track/models/task_detail.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../helpers/filter.dart';
 import '../../../../../helpers/helpers.dart';
+import '../../../../../models/models.dart';
 import 'agenda_card.dart';
 import 'focus_agenda_detail_card.dart';
 import 'update_status_agenda.dart';
@@ -66,9 +66,9 @@ class _AgendaCardAnimateNowState extends State<AgendaCardAnimateNow> {
             duration: Duration(milliseconds: 300),
             child: _isExpanded
                 ? FocusAgendaDetailCard(
-                    customer: _data.customer.company,
+                    customer: _data.customer?.company ?? '-',
                     title: _data.title,
-                    desc: _data.desc,
+                    desc: _data.desc ?? '-',
                     date: formatDateText(_data.dueDate),
                     rangeTime: widget.timeRange,
                     priority: _data.priority.name,
@@ -77,7 +77,7 @@ class _AgendaCardAnimateNowState extends State<AgendaCardAnimateNow> {
                     },
                   )
                 : AgendaNow(
-                    desc: _data.desc,
+                    desc: _data.desc ?? '-',
                     endTime: _data.endTime,
                     startTime: _data.startTime,
                     title: _data.title,
@@ -134,9 +134,9 @@ class _AgendaCardAnimateState extends State<AgendaCardAnimate> {
             duration: Duration(milliseconds: 300),
             child: widget.isExpanded
                 ? FocusAgendaDetailCard(
-                    customer: _data.customer.company,
+                    customer: _data.customer?.company ?? '-',
                     title: _data.title,
-                    desc: _data.desc,
+                    desc: _data.desc ?? '-',
                     date: formatDateText(_data.dueDate),
                     rangeTime: widget.timeRange,
                     priority: _data.priority.name,
@@ -145,7 +145,7 @@ class _AgendaCardAnimateState extends State<AgendaCardAnimate> {
                     },
                   )
                 : AgendaCard(
-                    desc: _data.desc,
+                    desc: _data.desc ?? '-',
                     endTime: _data.endTime,
                     startTime: _data.startTime,
                     title: _data.title,

@@ -1,5 +1,4 @@
 import 'package:crm_track/helpers/helpers.dart';
-import 'package:crm_track/models/task_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -53,16 +52,21 @@ class _TaskListPageState extends State<TaskListPage> {
                     width: 1,
                   ),
                 ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFE6E6E6),
+                  ),
+                ),
               ),
             ),
           ),
-          TaskFilterWidget(
+          FilterWidget(
             taskFilter: taskFilter,
             onSelected: (index) {
               setState(() {
                 selectedIndex = index;
               });
-              print(selectedIndex);
             },
           ),
           spacerHeight(12),

@@ -1,10 +1,11 @@
 import 'package:crm_track/cubit/task_list/task_list_cubit.dart';
 import 'package:crm_track/helpers/helpers.dart';
-import 'package:crm_track/models/task_detail.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+
+import '../../../models/models.dart';
 
 class TaskListDetail extends StatelessWidget {
   final TaskDetail task;
@@ -272,7 +273,7 @@ class TaskListDetail extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      task.sender.cc.join(', '),
+                      task.sender.cc?.join(', ') ?? '-',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: medium,
@@ -307,7 +308,7 @@ class TaskListDetail extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      task.customer.name,
+                      task.customer!.name,
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: medium,
@@ -324,7 +325,7 @@ class TaskListDetail extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      task.customer.email,
+                      task.customer!.email,
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: medium,
@@ -341,7 +342,7 @@ class TaskListDetail extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      task.customer.phone,
+                      task.customer?.phone ?? '-',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: medium,
@@ -358,7 +359,7 @@ class TaskListDetail extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      task.customer.jobTitle,
+                      task.customer?.jobTitle ?? '-',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: medium,
@@ -375,7 +376,7 @@ class TaskListDetail extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      task.customer.company,
+                      task.customer?.company ?? '-',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: medium,
@@ -410,7 +411,7 @@ class TaskListDetail extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      task.product.name,
+                      task.product?.name ?? '-',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: medium,
@@ -427,7 +428,7 @@ class TaskListDetail extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      task.product.businessLine,
+                      task.product?.businessLine ?? '-',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: medium,
@@ -462,11 +463,9 @@ class TaskListDetail extends StatelessWidget {
         ),
         child: ElevatedButton(
           onPressed: () {
-            //open modal
             showModalBottomSheet(
               context: context,
-              isScrollControlled:
-                  true, // Allows the modal to adjust dynamically
+              isScrollControlled: true,
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20),
@@ -478,12 +477,9 @@ class TaskListDetail extends StatelessWidget {
                   builder: (context, setState) {
                     return Padding(
                       padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context)
-                            .viewInsets
-                            .bottom, // Adjust for keyboard
+                        bottom: MediaQuery.of(context).viewInsets.bottom,
                       ),
                       child: Wrap(
-                        // Wrap makes the modal height fit content
                         children: [
                           Container(
                             padding: const EdgeInsets.symmetric(
@@ -497,8 +493,7 @@ class TaskListDetail extends StatelessWidget {
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize
-                                  .min, // Ensures it doesn't take extra space
+                              mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
                                   'Update Status',

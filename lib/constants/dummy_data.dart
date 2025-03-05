@@ -1,7 +1,6 @@
-import 'package:crm_track/models/task_detail.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
+import '../models/models.dart';
 
 List<TaskDetail> dummyTask = [
   // 10 tasks for today
@@ -64,6 +63,88 @@ List<TaskDetail> dummyTask = [
         isComplete: i % 2 == 0,
         type: i % 2 == 0 ? 'Follow up' : 'Meeting',
       ),
+];
+
+List<String> assignors = [
+  "John Doe",
+  "Alice Brown",
+  "Michael Scott",
+  "David Beckham",
+  "Elon Musk",
+];
+
+List<String> category = [
+  'Meeting',
+  'Follow up',
+];
+
+List<List<String>> ccList = [
+  ["jane.doe@example.com", "mark.smith@example.com"],
+  ["charlie.johnson@example.com", "lucy.white@example.com"],
+  ["jim.halpert@example.com", "pam.beesly@example.com"],
+  ["ronaldo.cristiano@example.com", "messi.lionel@example.com"],
+  ["tesla.team@example.com", "spacex.engineers@example.com"],
+];
+
+List<ProductDetail> dummyProducts = [
+  ProductDetail(
+    name: "Custom Website Development",
+    businessLine: "Software Services",
+  ),
+  ProductDetail(
+    name: "Mobile App Development",
+    businessLine: "Software Services",
+  ),
+  ProductDetail(
+    name: "Cloud Solutions",
+    businessLine: "Software Services",
+  ),
+  ProductDetail(
+    name: "Cybersecurity Consulting",
+    businessLine: "Software Services",
+  ),
+  ProductDetail(
+    name: "AI & Machine Learning Services",
+    businessLine: "Software Services",
+  ),
+];
+
+List<CustomerDetail> dummyCustomers = [
+  CustomerDetail(
+    name: "Ahmad Fauzi",
+    email: "ahmad.fauzi@example.com",
+    phone: "+6281234567890",
+    jobTitle: "Software Engineer",
+    company: "TechCorp",
+  ),
+  CustomerDetail(
+    name: "Budi Santoso",
+    email: "budi.santoso@example.com",
+    phone: "+6289876543210",
+    jobTitle: "Project Manager",
+    company: "Inovasi Digital",
+  ),
+  CustomerDetail(
+    name: "Citra Permata",
+    email: "citra.permata@example.com",
+    phone: "+6281357924680",
+    jobTitle: "UI/UX Designer",
+    company: "Creative Studio",
+  ),
+  CustomerDetail(
+    name: "Dewi Kusuma",
+    email: "dewi.kusuma@example.com",
+    phone: "+6281765432109",
+    jobTitle: "Marketing Specialist",
+    company: "BizGrowth",
+  ),
+  CustomerDetail(
+    name: "Eko Saputra",
+    email: "eko.saputra@example.com",
+    phone: "+6281122334455",
+    jobTitle: "Data Analyst",
+    company: "DataWorks",
+  ),
 ];
 
 /// **Fungsi untuk mendapatkan daftar tanggal dalam satu minggu**
