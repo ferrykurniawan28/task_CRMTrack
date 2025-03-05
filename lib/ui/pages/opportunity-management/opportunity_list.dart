@@ -24,6 +24,7 @@ class _OpportunityListState extends State<OpportunityList> {
   ];
   @override
   void initState() {
+    BlocProvider.of<OpportunityManagementCubit>(context).fetchOpportunity();
     super.initState();
   }
 
