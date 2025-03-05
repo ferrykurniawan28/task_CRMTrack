@@ -273,7 +273,7 @@ class TaskListDetail extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      task.sender.cc.join(', '),
+                      task.sender.cc?.join(', ') ?? '-',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: medium,
@@ -308,7 +308,7 @@ class TaskListDetail extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      task.customer.name,
+                      task.customer!.name,
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: medium,
@@ -325,7 +325,7 @@ class TaskListDetail extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      task.customer.email,
+                      task.customer!.email,
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: medium,
@@ -342,7 +342,7 @@ class TaskListDetail extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      task.customer.phone,
+                      task.customer?.phone ?? '-',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: medium,
@@ -359,7 +359,7 @@ class TaskListDetail extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      task.customer.jobTitle,
+                      task.customer?.jobTitle ?? '-',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: medium,
@@ -376,7 +376,7 @@ class TaskListDetail extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      task.customer.company,
+                      task.customer?.company ?? '-',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: medium,
@@ -411,7 +411,7 @@ class TaskListDetail extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      task.product.name,
+                      task.product?.name ?? '-',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: medium,
@@ -428,7 +428,7 @@ class TaskListDetail extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      task.product.businessLine,
+                      task.product?.businessLine ?? '-',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: medium,

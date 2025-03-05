@@ -33,12 +33,12 @@ class _AgendaState extends State<Agenda> {
   }
 
   void _onScroll() {
-    if (_scrollController.offset > 20 && !_isSmallCalendar) {
+    if (_scrollController.offset > 10 && !_isSmallCalendar) {
       setState(() {
         _calendarHeight = 140.0;
         _isSmallCalendar = true;
       });
-    } else if (_scrollController.offset <= 20 && _isSmallCalendar) {
+    } else if (_scrollController.offset <= 10 && _isSmallCalendar) {
       setState(() {
         _calendarHeight = 350.0;
         _isSmallCalendar = false;

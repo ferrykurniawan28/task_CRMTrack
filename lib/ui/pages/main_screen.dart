@@ -3,6 +3,9 @@ import 'package:crm_track/ui/pages/home/home_screen.dart';
 import 'package:crm_track/ui/pages/profile_screen.dart';
 import 'package:crm_track/ui/pages/task/task_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
+import 'agenda/agenda.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -16,7 +19,7 @@ class _MainScreenState extends State<MainScreen> {
   List<Widget> screens = [
     const HomeScreen(),
     const Agenda(),
-    const HomeScreen(),
+    const AddTaskPage(),
     const TaskListPage(),
     const ProfileScreen(),
   ];
@@ -81,7 +84,7 @@ class _MainScreenState extends State<MainScreen> {
             Positioned(
               bottom: 5,
               child: GestureDetector(
-                onTap: () => onTap(2),
+                onTap: () => Modular.to.pushNamed('/add'),
                 child: Container(
                   height: 56,
                   width: 56,

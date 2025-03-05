@@ -2,6 +2,8 @@ import 'package:crm_track/helpers/helpers.dart';
 import 'package:crm_track/models/models.dart';
 import 'package:flutter/material.dart';
 
+import '../models/models.dart';
+
 ///filter task list model
 List<TaskDetail> filterTaskListHariIni(List<TaskDetail> dataList) {
   return dataList.where((element) {

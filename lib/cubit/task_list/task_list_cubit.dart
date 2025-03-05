@@ -35,6 +35,7 @@ class TaskListCubit extends Cubit<TaskListState> {
       tasks.add(task);
       emit(TaskListLoaded(tasks));
     }
+    print('TASKS ADDED');
   }
 
   void updateTask(TaskDetail task) {

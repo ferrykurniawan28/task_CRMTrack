@@ -1,3 +1,6 @@
+import 'package:crm_track/models/task_detail.dart';
+import 'package:crm_track/models/opportunity_model.dart';
+import 'package:crm_track/ui/pages/add_task.dart';
 import 'package:crm_track/ui/pages/agenda/agenda.dart';
 import 'package:crm_track/models/opportunity_model.dart';
 import 'package:crm_track/ui/pages/authentication/login.dart';
@@ -36,6 +39,9 @@ class MainRoutes extends Module {
     r.child('/marketing-toolkit', child: (_) => const MarketingToolkitScreen());
     r.child('/list-activity', child: (_) => const ListActivityScreen());
     r.module('/workflow', module: WorkflowRoutes());
+    r.child('/agenda', child: (_) => const Agenda());
+    r.child('/add', child: (_) => const AddTaskPage());
+
     r.module('/auth', module: AuthRoutes());
     r.module('/opportunity-management', module: OpportunityManagementRoutes());
   }

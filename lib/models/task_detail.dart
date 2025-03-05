@@ -3,13 +3,13 @@ part of 'models.dart';
 class TaskDetail {
   int? id;
   String title;
-  String desc;
+  String? desc;
   DateTime dueDate;
   TaskPriority priority;
   TaskStatus status;
   SenderDetail sender;
-  CustomerDetail customer;
-  ProductDetail product;
+  CustomerDetail? customer;
+  ProductDetail? product;
   TimeOfDay startTime;
   TimeOfDay endTime;
   bool isComplete;
@@ -18,13 +18,13 @@ class TaskDetail {
   TaskDetail({
     this.id,
     required this.title,
-    required this.desc,
+    this.desc,
     required this.dueDate,
     required this.priority,
     required this.status,
     required this.sender,
-    required this.customer,
-    required this.product,
+    this.customer,
+    this.product,
     required this.endTime,
     required this.startTime,
     required this.isComplete,
@@ -78,8 +78,8 @@ class TaskDetail {
       'priority': priority.index,
       'status': status.index,
       'sender': sender.toJson(),
-      'customer': customer.toJson(),
-      'product': product.toJson(),
+      'customer': customer!.toJson(),
+      'product': product!.toJson(),
     };
   }
 }
@@ -100,11 +100,11 @@ enum TaskStatus {
 
 class SenderDetail {
   String assignor;
-  List<String> cc;
+  List<String>? cc;
 
   SenderDetail({
     required this.assignor,
-    required this.cc,
+    this.cc,
   });
 
   factory SenderDetail.fromJson(Map<String, dynamic> json) {
