@@ -16,12 +16,12 @@ class TaskListCubit extends Cubit<TaskListState> {
     try {
       final tasks = dummyTask;
       emit(TaskListLoaded(tasks));
-      print('INI DATA LIST TASK');
-      print(tasks);
-      print('SAMPAI SINI');
+      // print('INI DATA LIST TASK');
+      // print(tasks);
+      // print('SAMPAI SINI');
     } catch (e) {
       emit(TaskListError(e.toString()));
-      print('ERROR:\N${e.toString()}');
+      // print('ERROR:\N${e.toString()}');
     }
   }
 

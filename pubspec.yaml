@@ -24,6 +24,7 @@ dependencies:
   open_file: ^3.5.10
   path_provider: ^2.1.5
   signature: ^5.5.0
+  table_calendar: ^3.2.0
   timeline_tile: ^2.0.0
   video_thumbnail: ^0.5.3
 
@@ -31,7 +32,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
-  table_calendar: ^3.2.0
 
 flutter:
   uses-material-design: true

@@ -1,7 +1,9 @@
+import 'package:crm_track/cubit/opportunity-management/opportunity_management_cubit.dart';
 import 'package:crm_track/helpers/helpers.dart';
 import 'package:crm_track/models/opportunity_model.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class OpportunityDetail extends StatelessWidget {
@@ -505,8 +507,13 @@ class OpportunityDetail extends StatelessWidget {
                           Expanded(
                             child: ElevatedButton(
                               onPressed: () {
-                                opportunity.stage = newStage;
-
+                                final newOpportunity = opportunity.copyWith(
+                                  stage: newStage,
+                                );
+                                BlocProvider.of<OpportunityManagementCubit>(
+                                        context)
+                                    .updateStageOpportunity(newOpportunity);
+                                // opportunity.stage = newStage;
                                 Navigator.pop(context);
                                 Navigator.pop(context);
                               },

@@ -84,7 +84,6 @@ Widget notificationCard(Notifications notification) {
                     ],
                   ),
                 ),
-              // TODO: Handle this case.
               null => throw UnimplementedError(),
             },
             const Spacer(),

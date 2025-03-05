@@ -1,4 +1,5 @@
 import 'package:crm_track/cubit/notification/notification_cubit.dart';
+import 'package:crm_track/cubit/opportunity-management/opportunity_management_cubit.dart';
 import 'package:crm_track/cubit/task_list/task_list_cubit.dart';
 import 'package:crm_track/routes/routes.dart';
 import 'package:crm_track/cubit/task/task_cubit.dart';
@@ -18,7 +19,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Modular.setInitialRoute('/home');
+    Modular.setInitialRoute('/splash');
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -29,6 +30,9 @@ class MainApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => TaskListCubit(),
+        ),
+        BlocProvider(
+          create: (context) => OpportunityManagementCubit(),
         ),
       ],
       child: MaterialApp.router(

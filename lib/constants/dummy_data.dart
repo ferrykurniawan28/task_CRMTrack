@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../models/models.dart';
 
 List<TaskDetail> dummyTask = [
@@ -14,7 +13,7 @@ List<TaskDetail> dummyTask = [
       status: TaskStatus.values[i % 5],
       sender: SenderDetail(
         assignor: 'Sender $i',
-        cc: ['cc${i}@email.com', 'cc${i + 1}@email.com'],
+        cc: ['cc$i@email.com', 'cc${i + 1}@email.com'],
       ),
       customer: CustomerDetail(
         name: 'Customer $i',
@@ -45,7 +44,7 @@ List<TaskDetail> dummyTask = [
         status: TaskStatus.values[i % 5],
         sender: SenderDetail(
           assignor: 'Sender $i',
-          cc: ['cc${i}@email.com', 'cc${i + 1}@email.com'],
+          cc: ['cc$i@email.com', 'cc${i + 1}@email.com'],
         ),
         customer: CustomerDetail(
           name: 'Customer $i',
@@ -149,7 +148,7 @@ List<CustomerDetail> dummyCustomers = [
 
 /// **Fungsi untuk mendapatkan daftar tanggal dalam satu minggu**
 List<Map<String, dynamic>> getDate({int weeksAfter = 0}) {
-  final any = DateTime.now().add(Duration(days: 2));
+  final any = DateTime.now().add(const Duration(days: 2));
   final dateOnly = DateTime(any.year, any.month, any.day);
 
   // List nama hari dan bulan

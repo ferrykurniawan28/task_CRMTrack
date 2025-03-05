@@ -10,8 +10,9 @@ class FocusAgendaDetailCard extends StatelessWidget {
   final String date;
   final String rangeTime;
   final String priority;
-  Function()? callbak;
-  FocusAgendaDetailCard({
+  final Function()? callbak;
+
+  const FocusAgendaDetailCard({
     super.key,
     required this.customer,
     required this.title,
@@ -25,7 +26,7 @@ class FocusAgendaDetailCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
@@ -33,7 +34,7 @@ class FocusAgendaDetailCard extends StatelessWidget {
           width: 1,
           color: getPriorityColor(priority),
         ),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.grey,
             blurRadius: 4,
@@ -57,28 +58,29 @@ class FocusAgendaDetailCard extends StatelessWidget {
                 ),
                 child: Image.asset('assets/images/Avatar.png'),
               ),
-              spacerWidth(11),
+              const SizedBox(width: 11),
               Text(
                 customer,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                 ),
               ),
             ],
           ),
-          spacerHeight(12),
+          const SizedBox(height: 12),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 title,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 textAlign: TextAlign.start,
               ),
               Text(
                 desc,
-                style: TextStyle(
+                style: const TextStyle(
                   color: kColorGrey,
                   fontWeight: FontWeight.w400,
                   fontSize: 12,
@@ -86,86 +88,78 @@ class FocusAgendaDetailCard extends StatelessWidget {
               ),
             ],
           ),
-          spacerHeight(5),
+          const SizedBox(height: 5),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                child: Row(
-                  children: [
-                    Image.asset('assets/icon/calendar-date.png'),
-                    spacerWidth(10),
-                    Text(
-                      date,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12,
-                      ),
+              Row(
+                children: [
+                  Image.asset('assets/icon/calendar-date.png'),
+                  const SizedBox(width: 10),
+                  Text(
+                    date,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Container(
-                child: Row(
-                  children: [
-                    Container(
-                      child: Row(
-                        children: [
-                          Image.asset('assets/icon/clock-history.png'),
-                          spacerWidth(10),
-                          Text(
-                            rangeTime,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
+              Row(
+                children: [
+                  Row(
+                    children: [
+                      Image.asset('assets/icon/clock-history.png'),
+                      const SizedBox(width: 10),
+                      Text(
+                        rangeTime,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
+                        ),
                       ),
-                    ),
-                    spacerWidth(20),
-                    Container(
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            'assets/icon/lightning-fill.png',
-                            color: priority == 'high'
-                                ? kColorRed
-                                : priority == 'low'
-                                    ? kColorGreen
-                                    : kColorLightBlue,
-                          ),
-                          spacerWidth(10),
-                          Text(
-                            priority,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 12,
-                              color: priority == 'high'
-                                  ? kColorRed
-                                  : priority == 'low'
-                                      ? kColorGreen
-                                      : kColorLightBlue,
-                            ),
-                          ),
-                        ],
+                    ],
+                  ),
+                  const SizedBox(width: 20),
+                  Row(
+                    children: [
+                      Image.asset(
+                        'assets/icon/lightning-fill.png',
+                        color: priority == 'high'
+                            ? kColorRed
+                            : priority == 'low'
+                                ? kColorGreen
+                                : kColorLightBlue,
                       ),
-                    ),
-                  ],
-                ),
+                      const SizedBox(width: 10),
+                      Text(
+                        priority,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
+                          color: priority == 'high'
+                              ? kColorRed
+                              : priority == 'low'
+                                  ? kColorGreen
+                                  : kColorLightBlue,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           ),
-          spacerHeight(12),
+          const SizedBox(height: 12),
           GestureDetector(
             onTap: callbak,
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 6),
+              padding: const EdgeInsets.symmetric(vertical: 6),
               decoration: BoxDecoration(
                 color: getPriorityColor(priority),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Update Status',
                   style: TextStyle(
