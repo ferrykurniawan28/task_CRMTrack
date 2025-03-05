@@ -26,6 +26,36 @@ class OpportunityModel {
     required this.lastModifiedBy,
     required this.customer,
   });
+
+  OpportunityModel copyWith({
+    String? id,
+    String? opprtunity,
+    String? description,
+    DateTime? closeDate,
+    int? amount,
+    OpportunityType? type,
+    OpportunityStage? stage,
+    LeadSource? leadSource,
+    int? probability,
+    String? createdBy,
+    String? lastModifiedBy,
+    CustomerOpportunity? customer,
+  }) {
+    return OpportunityModel(
+      id: id ?? this.id,
+      opprtunity: opprtunity ?? this.opprtunity,
+      description: description ?? this.description,
+      closeDate: closeDate ?? this.closeDate,
+      amount: amount ?? this.amount,
+      type: type ?? this.type,
+      stage: stage ?? this.stage,
+      leadSource: leadSource ?? this.leadSource,
+      probability: probability ?? this.probability,
+      createdBy: createdBy ?? this.createdBy,
+      lastModifiedBy: lastModifiedBy ?? this.lastModifiedBy,
+      customer: customer ?? this.customer,
+    );
+  }
 }
 
 enum OpportunityStage {
