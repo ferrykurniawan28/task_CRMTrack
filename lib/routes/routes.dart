@@ -25,7 +25,7 @@ part 'opportunity_management.dart';
 class MainRoutes extends Module {
   @override
   void routes(RouteManager r) {
-    // r.child('/splash', child: (_) => const SplashScreen());
+    r.child('/splash', child: (_) => const SplashScreen());
     r.child('/home', child: (_) => const MainScreen());
     r.child('/notification-center', child: (_) => const NotificationCenter());
     r.child('/task/detail', child: (context) {

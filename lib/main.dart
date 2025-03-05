@@ -18,7 +18,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Modular.setInitialRoute('/home');
+    Modular.setInitialRoute('/splash');
     return MultiBlocProvider(
       providers: [
         BlocProvider(

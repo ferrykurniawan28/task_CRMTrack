@@ -24,7 +24,7 @@ class _HomeTaskListWidgetState extends State<HomeTaskListWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      padding: EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
@@ -114,6 +114,7 @@ class _HomeTaskListWidgetState extends State<HomeTaskListWidget> {
                   ).toList();
 
                   return ListView.builder(
+                    padding: EdgeInsets.only(bottom: 12),
                     itemCount: filteredData.length,
                     itemBuilder: (context, index) {
                       final dataTask = filteredData[index];
