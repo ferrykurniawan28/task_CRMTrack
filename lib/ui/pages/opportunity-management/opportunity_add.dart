@@ -1,6 +1,9 @@
+import 'package:crm_track/constants/dummy_data.dart';
 import 'package:crm_track/cubit/opportunity-management/opportunity_management_cubit.dart';
 import 'package:crm_track/helpers/helpers.dart';
+import 'package:crm_track/models/models.dart';
 import 'package:crm_track/models/opportunity_model.dart';
+import 'package:crm_track/ui/widgets/text_field.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,10 +25,6 @@ class _OpportunityAddState extends State<OpportunityAdd> {
   final _amount = TextEditingController();
   final _probability = TextEditingController();
   final _description = TextEditingController();
-  final _email = TextEditingController();
-  final _phone = TextEditingController();
-  final _jobTitle = TextEditingController();
-  final _companyName = TextEditingController();
   OpportunityType? _opportunityType;
   final _formKey1 = GlobalKey<FormState>();
   final _formKey2 = GlobalKey<FormState>();
@@ -33,6 +32,7 @@ class _OpportunityAddState extends State<OpportunityAdd> {
   DateTime? _selectedCloseDate;
   OpportunityStage? _selectedStage;
   LeadSource? _selectedSource;
+  CustomerDetail? _selectedCustomer;
 
   void _nextPage() {
     if (_currentIndex == 0 && _formKey1.currentState!.validate()) {
@@ -40,6 +40,14 @@ class _OpportunityAddState extends State<OpportunityAdd> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Please select opportunity type'),
+          ),
+        );
+        return;
+      }
+      if (_selectedCustomer == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Please select customer'),
           ),
         );
         return;
@@ -85,12 +93,12 @@ class _OpportunityAddState extends State<OpportunityAdd> {
         createdBy: 'Admin',
         lastModifiedBy: 'Admin',
         customer: CustomerOpportunity(
-          id: 1,
-          name: _customerName.text,
-          email: _email.text,
-          phone: int.parse(_phone.text),
-          jobTitle: _jobTitle.text,
-          company: _companyName.text,
+          id: 80,
+          name: _selectedCustomer!.name,
+          email: _selectedCustomer!.email,
+          phone: int.parse(_selectedCustomer!.phone),
+          jobTitle: _selectedCustomer!.jobTitle,
+          company: _selectedCustomer!.company,
         ),
       );
       BlocProvider.of<OpportunityManagementCubit>(context)
@@ -314,16 +322,19 @@ class _OpportunityAddState extends State<OpportunityAdd> {
                   onTypeChanged: (OpportunityType? type) {
                     setState(() => _opportunityType = type);
                   },
+                  onCustomerChanged: (CustomerDetail? customer) {
+                    setState(() => _selectedCustomer = customer);
+                  },
                 ),
                 ProjectDetail(
                   formKey: _formKey2,
                   amountController: _amount,
                   probabilityController: _probability,
                   descriptionController: _description,
-                  email: _email,
-                  phone: _phone,
-                  jobTitle: _jobTitle,
-                  companyName: _companyName,
+                  // email: _email,
+                  // phone: _phone,
+                  // jobTitle: _jobTitle,
+                  // companyName: _companyName,
                   closeDate: _selectedCloseDate,
                   selectStage: _selectedStage,
                   selectSource: _selectedSource,
@@ -425,12 +436,13 @@ class _OpportunityAddState extends State<OpportunityAdd> {
   }
 }
 
-class ProjectOverview extends StatelessWidget {
+class ProjectOverview extends StatefulWidget {
   final TextEditingController opportunityNameController;
   final TextEditingController customerNameController;
   final OpportunityType? opportunityType;
   final GlobalKey<FormState> formKey;
   final Function(OpportunityType?) onTypeChanged;
+  final Function(CustomerDetail?) onCustomerChanged;
 
   const ProjectOverview({
     super.key,
@@ -439,12 +451,18 @@ class ProjectOverview extends StatelessWidget {
     required this.opportunityType,
     required this.formKey,
     required this.onTypeChanged,
+    required this.onCustomerChanged,
   });
 
   @override
+  State<ProjectOverview> createState() => _ProjectOverviewState();
+}
+
+class _ProjectOverviewState extends State<ProjectOverview> {
+  @override
   Widget build(BuildContext context) {
     return Form(
-      key: formKey,
+      key: widget.formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -454,18 +472,22 @@ class ProjectOverview extends StatelessWidget {
             child: _buildTextField(
               label: 'Opportunity Name',
               hintText: 'Enter project opportunity name',
-              controller: opportunityNameController,
+              controller: widget.opportunityNameController,
               validatorMsg: 'Please enter opportunity name',
             ),
           ),
           spacerHeight(16),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: _buildTextField(
-              label: 'Customer Name',
-              hintText: 'Enter customer',
-              controller: customerNameController,
-              validatorMsg: 'Please enter customer name',
+            child: CustomDropDown(
+              itemLabel: (customer) => customer.name,
+              isImportant: false,
+              title: 'Customer',
+              dataDropDown: dummyCustomers,
+              onChange: (customer) {
+                widget.onCustomerChanged(customer);
+              },
+              hint: 'Choose customer',
             ),
           ),
           spacerHeight(16),
@@ -484,18 +506,18 @@ class ProjectOverview extends StatelessWidget {
             visualDensity: VisualDensity.compact,
             title: const Text('New Business'),
             value: OpportunityType.newBusiness,
-            groupValue: opportunityType,
+            groupValue: widget.opportunityType,
             activeColor: primaryColor,
-            onChanged: onTypeChanged,
+            onChanged: widget.onTypeChanged,
           ),
           RadioListTile<OpportunityType>(
             dense: true,
             visualDensity: VisualDensity.compact,
             title: const Text('Existing Business'),
             value: OpportunityType.existingBusiness,
-            groupValue: opportunityType,
+            groupValue: widget.opportunityType,
             activeColor: primaryColor,
-            onChanged: onTypeChanged,
+            onChanged: widget.onTypeChanged,
           ),
         ],
       ),
@@ -507,10 +529,6 @@ class ProjectDetail extends StatefulWidget {
   final TextEditingController amountController;
   final TextEditingController probabilityController;
   final TextEditingController descriptionController;
-  final TextEditingController email;
-  final TextEditingController phone;
-  final TextEditingController jobTitle;
-  final TextEditingController companyName;
   final GlobalKey<FormState> formKey;
   final DateTime? closeDate;
   final OpportunityStage? selectStage;
@@ -523,10 +541,6 @@ class ProjectDetail extends StatefulWidget {
     required this.amountController,
     required this.probabilityController,
     required this.descriptionController,
-    required this.email,
-    required this.phone,
-    required this.jobTitle,
-    required this.companyName,
     required this.formKey,
     required this.closeDate,
     required this.selectStage,
@@ -855,71 +869,6 @@ class _ProjectDetailState extends State<ProjectDetail> {
               dashLength: 4,
               lineThickness: 1,
               dashRadius: 0,
-            ),
-          ),
-          spacerHeight(12),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Customer Information',
-                  style: TextStyle(fontSize: 16, fontWeight: medium),
-                ),
-                spacerHeight(8),
-                _buildTextField(
-                  label: 'Email',
-                  hintText: 'Enter email',
-                  controller: widget.email,
-                  validatorMsg: 'Please enter email',
-                ),
-              ],
-            ),
-          ),
-          spacerHeight(12),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildTextField(
-                  label: 'Phone',
-                  hintText: 'Enter number',
-                  controller: widget.phone,
-                  validatorMsg: 'Please enter phone number',
-                ),
-              ],
-            ),
-          ),
-          spacerHeight(12),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildTextField(
-                  label: 'Job Title',
-                  hintText: 'Enter job title',
-                  controller: widget.jobTitle,
-                  validatorMsg: 'Please enter job title',
-                ),
-              ],
-            ),
-          ),
-          spacerHeight(12),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildTextField(
-                  label: 'Company Name',
-                  hintText: 'Enter company name',
-                  controller: widget.companyName,
-                  validatorMsg: 'Please enter company name',
-                ),
-              ],
             ),
           ),
           spacerHeight(12),

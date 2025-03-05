@@ -1,17 +1,18 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables
+
+import 'package:flutter/material.dart';
 
 import 'package:crm_track/helpers/filter.dart';
 import 'package:crm_track/helpers/helpers.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class CustomTextField extends StatelessWidget {
   final bool isImportant;
   final String title;
-  String? hint;
-  TextEditingController? controller;
+  final String? hint;
+  final TextEditingController? controller;
 
-  CustomTextField({
+  const CustomTextField({
     super.key,
     required this.isImportant,
     required this.title,
@@ -44,7 +45,7 @@ class CustomTextField extends StatelessWidget {
             ],
           ),
           spacerHeight(5),
-          Container(
+          SizedBox(
             width: double.infinity,
             child: TextFormField(
               controller: controller,
@@ -73,11 +74,11 @@ class CustomTextField extends StatelessWidget {
 class CustomDescriptionField extends StatelessWidget {
   final bool isImportant;
   final String title;
-  String? hint;
-  TextEditingController? controller;
-  int legth;
+  final String? hint;
+  final TextEditingController? controller;
+  final int legth;
 
-  CustomDescriptionField({
+  const CustomDescriptionField({
     super.key,
     required this.isImportant,
     required this.title,
@@ -94,7 +95,7 @@ class CustomDescriptionField extends StatelessWidget {
           Row(
             children: [
               Text(
-                '$title',
+                title,
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
@@ -135,21 +136,21 @@ class CustomDescriptionField extends StatelessWidget {
 
 class CustomDropDown<T> extends StatefulWidget {
   final List<T> dataDropDown;
-  Function(T)? onChange;
+  final Function(T)? onChange;
   final bool isImportant;
   final String title;
-  TextEditingController? controller;
+  final TextEditingController? controller;
   final String Function(T) itemLabel; // Untuk menentukan teks yang ditampilkan
   final String? hint;
 
-  CustomDropDown({
+  const CustomDropDown({
     super.key,
+    required this.dataDropDown,
+    this.onChange,
     required this.isImportant,
     required this.title,
-    required this.dataDropDown,
-    required this.itemLabel,
     this.controller,
-    this.onChange,
+    required this.itemLabel,
     this.hint,
   });
 
@@ -195,9 +196,13 @@ class _CustomDropDownState<T> extends State<CustomDropDown<T>> {
           onChanged: (value) {
             setState(() {
               selectedValue = value;
-              widget.controller!.text = widget.itemLabel(value!);
+              if (widget.controller != null) {
+                widget.controller!.text = widget.itemLabel(value as T);
+              }
             });
-            widget.onChange!(value!);
+            if (widget.onChange != null) {
+              widget.onChange!(value as T);
+            }
           },
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: widget.isImportant
@@ -221,13 +226,13 @@ class _CustomDropDownState<T> extends State<CustomDropDown<T>> {
 }
 
 class CustomDatePicker extends StatefulWidget {
-  Function(dynamic)? onChange;
-  bool isImportant;
+  final Function(DateTime)? onChange;
+  final bool isImportant;
   final String title;
-  TextEditingController? controller;
+  final TextEditingController? controller;
   final String? Function(String?)? validator; // Validator function
 
-  CustomDatePicker({
+  const CustomDatePicker({
     super.key,
     required this.isImportant,
     required this.title,
@@ -241,8 +246,6 @@ class CustomDatePicker extends StatefulWidget {
 }
 
 class _CustomDatePickerState extends State<CustomDatePicker> {
-  var selectedValue;
-
   Future<void> _pickDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,

@@ -18,17 +18,17 @@ class AddTaskPage extends StatefulWidget {
 class _AddTaskPageState extends State<AddTaskPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  TextEditingController _categoryController = TextEditingController();
-  TextEditingController _assignedController = TextEditingController();
-  TextEditingController _subjectController = TextEditingController();
-  TextEditingController _ccController = TextEditingController();
-  TextEditingController _productController = TextEditingController();
-  TextEditingController _customerController = TextEditingController();
-  TextEditingController _descriptionController = TextEditingController();
-  TextEditingController _dueDateController = TextEditingController();
-  TextEditingController _reminderController = TextEditingController();
-  TextEditingController _statusController = TextEditingController();
-  TextEditingController _priorityController = TextEditingController();
+  final _categoryController = TextEditingController();
+  final _assignedController = TextEditingController();
+  final _subjectController = TextEditingController();
+  final _ccController = TextEditingController();
+  final _productController = TextEditingController();
+  final _customerController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _dueDateController = TextEditingController();
+  final _reminderController = TextEditingController();
+  final _statusController = TextEditingController();
+  final _priorityController = TextEditingController();
 
   late DateTime dueDate;
   late DateTime reminder;
@@ -207,7 +207,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                       spacerHeight(12),
                       CustomDropDown(
-                        itemLabel: (status) => status.name,
+                        itemLabel: (status) => taskStatusToString(status),
                         isImportant: true,
                         title: 'Status',
                         dataDropDown: TaskStatus.values,
@@ -221,7 +221,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                       spacerHeight(12),
                       CustomDropDown(
-                          itemLabel: (priority) => priority.name,
+                          itemLabel: (priority) =>
+                              taskPriorityToString(priority),
                           isImportant: true,
                           title: 'Priority',
                           dataDropDown: TaskPriority.values,
@@ -280,7 +281,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           GestureDetector(
                             onTap: () {
                               _formKey.currentState?.validate();
-                              print('VALIDATE DONE');
+                              // print('VALIDATE DONE');
 
                               addData(
                                 _subjectController.text,

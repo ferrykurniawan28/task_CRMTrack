@@ -3,8 +3,6 @@ import 'package:crm_track/constants/dummy_data.dart';
 import 'package:crm_track/models/models.dart';
 import 'package:meta/meta.dart';
 
-import '../../models/models.dart';
-
 part 'task_state.dart';
 
 class TaskCubit extends Cubit<TaskState> {

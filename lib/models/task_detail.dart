@@ -98,6 +98,36 @@ enum TaskStatus {
   other,
 }
 
+String taskPriorityToString(TaskPriority priority) {
+  switch (priority) {
+    case TaskPriority.low:
+      return 'Low';
+    case TaskPriority.normal:
+      return 'Normal';
+    case TaskPriority.high:
+      return 'High';
+    default:
+      return '';
+  }
+}
+
+String taskStatusToString(TaskStatus status) {
+  switch (status) {
+    case TaskStatus.notStarted:
+      return 'Not Started';
+    case TaskStatus.inProgress:
+      return 'In Progress';
+    case TaskStatus.completed:
+      return 'Completed';
+    case TaskStatus.deffered:
+      return 'Deffered';
+    case TaskStatus.other:
+      return 'Other';
+    default:
+      return '';
+  }
+}
+
 class SenderDetail {
   String assignor;
   List<String>? cc;

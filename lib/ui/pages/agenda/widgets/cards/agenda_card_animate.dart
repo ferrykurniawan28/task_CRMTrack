@@ -68,9 +68,9 @@ class _AgendaCardAnimateNowState extends State<AgendaCardAnimateNow> {
             duration: const Duration(milliseconds: 300),
             child: isExpanded
                 ? FocusAgendaDetailCard(
-                    customer: data.customer.company,
+                    customer: data.customer!.company,
                     title: data.title,
-                    desc: data.desc,
+                    desc: data.desc!,
                     date: formatDateText(data.dueDate),
                     rangeTime: widget.timeRange,
                     priority: data.priority.name,
@@ -79,7 +79,7 @@ class _AgendaCardAnimateNowState extends State<AgendaCardAnimateNow> {
                     },
                   )
                 : AgendaNow(
-                    desc: data.desc,
+                    desc: data.desc!,
                     endTime: data.endTime,
                     startTime: data.startTime,
                     title: data.title,
@@ -144,9 +144,9 @@ class _AgendaCardAnimateState extends State<AgendaCardAnimate> {
             duration: const Duration(milliseconds: 300),
             child: isExpanded
                 ? FocusAgendaDetailCard(
-                    customer: data.customer.company,
+                    customer: data.customer!.company,
                     title: data.title,
-                    desc: data.desc,
+                    desc: data.desc!,
                     date: formatDateText(data.dueDate),
                     rangeTime: widget.timeRange,
                     priority: data.priority.name,
@@ -155,7 +155,7 @@ class _AgendaCardAnimateState extends State<AgendaCardAnimate> {
                     },
                   )
                 : AgendaCard(
-                    desc: data.desc,
+                    desc: data.desc!,
                     endTime: data.endTime,
                     startTime: data.startTime,
                     title: data.title,

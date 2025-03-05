@@ -1,11 +1,10 @@
+import 'package:crm_track/ui/pages/add_task.dart';
 import 'package:crm_track/ui/pages/agenda/agenda.dart';
 import 'package:crm_track/ui/pages/home/home_screen.dart';
 import 'package:crm_track/ui/pages/profile_screen.dart';
 import 'package:crm_track/ui/pages/task/task_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
-import 'agenda/agenda.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
