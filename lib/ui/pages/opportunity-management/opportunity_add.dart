@@ -1,8 +1,10 @@
+import 'package:crm_track/cubit/opportunity-management/opportunity_management_cubit.dart';
 import 'package:crm_track/helpers/helpers.dart';
 import 'package:crm_track/models/opportunity_model.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 
@@ -91,7 +93,8 @@ class _OpportunityAddState extends State<OpportunityAdd> {
           company: _companyName.text,
         ),
       );
-      opportunityList.add(newOpportunity);
+      BlocProvider.of<OpportunityManagementCubit>(context)
+          .addOpportunity(newOpportunity);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Opportunity added successfully'),
