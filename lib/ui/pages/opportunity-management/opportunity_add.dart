@@ -581,8 +581,14 @@ class _ProjectDetailState extends State<ProjectDetail> {
                     FilteringTextInputFormatter.digitsOnly,
                   ],
                   validator: (value) {
-                    if (value!.isEmpty) {
+                    if (value == null || value.isEmpty) {
                       return 'Please enter amount';
+                    }
+                    final numValue = int.tryParse(value);
+                    if (numValue == null) {
+                      return 'Invalid number';
+                    } else if (numValue <= 0) {
+                      return 'Amount must be greater than 0';
                     }
                     return null;
                   },
@@ -741,6 +747,9 @@ class _ProjectDetailState extends State<ProjectDetail> {
                 TextFormField(
                   controller: widget.probabilityController,
                   keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                  ],
                   decoration: InputDecoration(
                     hintText: 'Enter probability',
                     suffixText: '%',
@@ -754,8 +763,16 @@ class _ProjectDetailState extends State<ProjectDetail> {
                     ),
                   ),
                   validator: (value) {
-                    if (value!.isEmpty) {
+                    if (value == null || value.isEmpty) {
                       return 'Please enter probability';
+                    }
+                    final numValue = int.tryParse(value);
+                    if (numValue == null) {
+                      return 'Invalid number';
+                    } else if (numValue > 100) {
+                      return 'Probability must be less than 100';
+                    } else if (numValue <= 0) {
+                      return 'Probability must be greater than 0';
                     }
                     return null;
                   },
