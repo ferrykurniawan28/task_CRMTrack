@@ -12,7 +12,7 @@ class MarketingToolkitScreen extends StatefulWidget {
 
 class _MarketingToolkitScreenState extends State<MarketingToolkitScreen> {
   bool _showGrid = true;
-  List<FileItem> _files = dummyFiles;
+  final List<FileItem> _files = dummyFiles;
   List<FileItem>? _recentFiles;
   List<FileItem>? _previousFiles;
 

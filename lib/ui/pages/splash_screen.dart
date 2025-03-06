@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:crm_track/ui/pages/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../../helpers/helpers.dart';
@@ -27,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
       progress = 0.0;
     });
 
-    print('LOADING START');
+    // print('LOADING START');
 
     Timer.periodic(
       const Duration(milliseconds: 200),
@@ -35,10 +34,10 @@ class _SplashScreenState extends State<SplashScreen> {
         setState(() {
           if (progress < 1.0) {
             progress += 0.05;
-            print(progress.toString());
+            // print(progress.toString());
           }
           if (progress >= 1.0) {
-            print('LOADING SELESAI');
+            // print('LOADING SELESAI');
             timer.cancel();
             isDownloading = false;
             Modular.to.navigate('/auth/login');
