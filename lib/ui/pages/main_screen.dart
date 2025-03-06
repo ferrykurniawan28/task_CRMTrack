@@ -1,4 +1,6 @@
+import 'package:crm_track/ui/pages/add_task.dart';
 import 'package:crm_track/ui/pages/agenda/agenda.dart';
+import 'package:crm_track/ui/pages/agenda/silver_agenda.dart';
 import 'package:crm_track/ui/pages/home/home_screen.dart';
 import 'package:crm_track/ui/pages/profile_screen.dart';
 import 'package:crm_track/ui/pages/task/task_list.dart';
@@ -18,7 +20,7 @@ class _MainScreenState extends State<MainScreen> {
   int _index = 0;
   List<Widget> screens = [
     const HomeScreen(),
-    const Agenda(),
+    const SilverAgenda(),
     const AddTaskPage(),
     const TaskListPage(),
     const ProfileScreen(),

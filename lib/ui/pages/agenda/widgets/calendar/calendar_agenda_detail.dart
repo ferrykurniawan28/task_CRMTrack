@@ -27,8 +27,11 @@ class _CalendarAgendaDetailState extends State<CalendarAgendaDetail> {
     print('${focusedDate.day} : ${focusedDate.month} : ${focusedDate.year}');
 
     return Container(
+      color: Colors.white,
+      height: 350,
       child: Column(
         children: [
+          spacerHeight(10),
           Container(
             height: 75,
             child: PageView.builder(

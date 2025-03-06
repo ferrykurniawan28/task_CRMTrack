@@ -1,4 +1,3 @@
-import 'package:crm_track/models/task_detail.dart';
 import 'package:crm_track/models/opportunity_model.dart';
 import 'package:crm_track/ui/pages/add_task.dart';
 import 'package:crm_track/ui/pages/agenda/agenda.dart';
